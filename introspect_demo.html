@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IntrospecAgentic.AI — Live Demo</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background: #07090f;
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* ── Animated background ── */
+  .bg-gradient {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, #0d1f3c 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 80% 100%, #0a1528 0%, transparent 55%),
+                #07090f;
+    z-index: 0;
+  }
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(rgba(0,180,255,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,180,255,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 0;
+  }
+
+  /* ── Scene system ── */
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.7s ease;
+    z-index: 1;
+    padding: 40px 60px;
+  }
+  .scene.active { opacity: 1; pointer-events: all; }
+
+  /* ── Progress dots ── */
+  #progress {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+  }
+  .dot.active { background: #00b4ff; width: 22px; border-radius: 4px; }
+
+  /* ── Click hint ── */
+  #hint {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    z-index: 10;
+    transition: opacity 0.5s;
+  }
+
+  /* ── Logo ── */
+  .logo {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #00b4ff, #7b61ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .logo-sm {
+    position: fixed;
+    top: 24px;
+    left: 32px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+  .logo-sm.show { opacity: 1; }
+
+  /* ── Typography ── */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #00b4ff;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: clamp(26px, 3.5vw, 44px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #00b4ff 0%, #7b61ff 60%, #ff61ab 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sub {
+    font-size: clamp(15px, 2vw, 20px);
+    color: rgba(255,255,255,0.55);
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 32px;
+    backdrop-filter: blur(10px);
+  }
+  .card-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 28px;
+  }
+  .stat-card {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 22px 24px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.45); }
+
+  /* ── Dashboard ── */
+  .dashboard {
+    width: 100%;
+    max-width: 820px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .dash-header {
+    background: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .dash-title { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8); }
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,230,118,0.1);
+    border: 1px solid rgba(0,230,118,0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #00e676;
+  }
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #00e676;
+    animation: pulse-green 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse-green {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .dash-body { padding: 24px; display: flex; gap: 16px; }
+  .dash-stat {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .dash-stat-num { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+  .dash-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+  /* ── Phone / SMS UI ── */
+  .phone-wrap {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    max-width: 820px;
+    width: 100%;
+  }
+  .phone {
+    width: 280px;
+    flex-shrink: 0;
+    background: #111827;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 36px;
+    padding: 16px 10px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  }
+  .phone-notch {
+    width: 90px; height: 24px;
+    background: #07090f;
+    border-radius: 12px;
+    margin: 0 auto 12px;
+  }
+  .phone-screen {
+    background: #000;
+    border-radius: 24px;
+    overflow: hidden;
+    min-height: 380px;
+  }
+  .sms-header {
+    background: #1c1c1e;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .sms-from { font-size: 13px; font-weight: 600; }
+  .sms-sub { font-size: 10px; color: rgba(255,255,255,0.4); }
+  .sms-body { padding: 16px 12px; display: flex; flex-direction: column; gap: 10px; }
+  .bubble {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 13px;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .bubble.show { opacity: 1; transform: translateY(0); }
+  .bubble.inbound {
+    background: #2c2c2e;
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+    color: #fff;
+  }
+  .bubble.outbound {
+    background: linear-gradient(135deg, #0a84ff, #5e5ce6);
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+    color: #fff;
+    text-align: right;
+  }
+  .bubble-time { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+
+  .panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .panel-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .panel-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .panel-value { font-size: 22px; font-weight: 700; }
+
+  /* ── Alert notification ── */
+  .alert-toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background: rgba(20,30,50,0.95);
+    border: 1px solid rgba(0,180,255,0.3);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 300px;
+    z-index: 20;
+    transform: translateX(120%);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .alert-toast.show { transform: translateX(0); }
+  .alert-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #00b4ff, #7b61ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .alert-text { flex: 1; }
+  .alert-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .alert-sub { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+  /* ── Timer ── */
+  .timer-ring {
+    width: 140px; height: 140px;
+    position: relative;
+    margin: 20px auto;
+  }
+  .timer-ring svg { transform: rotate(-90deg); }
+  .timer-ring circle {
+    fill: none;
+    stroke-width: 6;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear;
+  }
+  .timer-ring .track { stroke: rgba(255,255,255,0.08); }
+  .timer-ring .fill { stroke: url(#timerGrad); }
+  .timer-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Calendar ── */
+  .cal-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,230,118,0.2);
+    border-radius: 20px;
+    padding: 32px 40px;
+    text-align: center;
+    max-width: 460px;
+    width: 100%;
+    box-shadow: 0 0 60px rgba(0,230,118,0.08);
+  }
+  .cal-check {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00e676, #00b4ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 20px;
+    animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .cal-name { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .cal-type { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+  .cal-time {
+    background: rgba(0,180,255,0.1);
+    border: 1px solid rgba(0,180,255,0.2);
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #00b4ff;
+    margin-bottom: 8px;
+  }
+  .cal-note { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+  /* ── Result rows ── */
+  .result-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    max-width: 560px;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .result-row.show { opacity: 1; transform: translateX(0); }
+  .result-icon {
+    font-size: 26px;
+    width: 48px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .result-label { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 2px; }
+  .result-val { font-size: 18px; font-weight: 700; }
+
+  /* ── CTA Button ── */
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #00b4ff, #7b61ff);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    margin-top: 28px;
+    box-shadow: 0 8px 32px rgba(0,180,255,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,180,255,0.4);
+  }
+
+  /* ── Processing bar ── */
+  .process-bar {
+    width: 100%;
+    max-width: 480px;
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 12px 0;
+  }
+  .process-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00b4ff, #7b61ff);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 2s ease;
+  }
+  .process-fill.go { width: 100%; }
+
+  .process-step {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 10px;
+    min-height: 20px;
+  }
+
+  /* ── Scene-specific helpers ── */
+  .big-num {
+    font-size: clamp(80px, 12vw, 130px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .tag {
+    display: inline-block;
+    background: rgba(0,180,255,0.1);
+    border: 1px solid rgba(0,180,255,0.25);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #00b4ff;
+    letter-spacing: 0.05em;
+  }
+
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, #00b4ff, #7b61ff);
+    border-radius: 2px;
+    margin: 16px auto;
+  }
+
+  .typing-dots span {
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    animation: bounce 1.2s ease-in-out infinite;
+    margin: 0 2px;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce {
+    0%,60%,100% { transform: translateY(0); }
+    30% { transform: translateY(-8px); }
+  }
+
+  .flash {
+    animation: flashAnim 0.4s ease;
+  }
+  @keyframes flashAnim {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-gradient"></div>
+<div class="bg-grid"></div>
+
+<!-- Logo (shows after splash) -->
+<div class="logo-sm" id="logoSm"><span class="logo">IntrospecAgentic.AI</span></div>
+
+<!-- Alert toast -->
+<div class="alert-toast" id="alertToast">
+  <div class="alert-icon">📩</div>
+  <div class="alert-text">
+    <div class="alert-title">New Lead Detected</div>
+    <div class="alert-sub">Mike Thompson · Iron Valley Fitness</div>
+  </div>
+</div>
+
+<!-- Progress -->
+<div id="progress"></div>
+<div id="hint">Tap anywhere to advance</div>
+<div id="nextBtn" style="position:fixed;bottom:70px;right:28px;z-index:20;background:linear-gradient(135deg,#00b4ff,#7b61ff);border:none;border-radius:50px;padding:12px 24px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,180,255,0.35);" onclick="event.stopPropagation();next();">Next →</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 0 — SPLASH
+     ═══════════════════════════════════════ -->
+<div class="scene active" id="s0">
+  <div style="text-align:center;">
+    <div style="font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:0.04em;margin-bottom:8px;">
+      <span class="gradient-text">IntrospecAgentic.AI</span>
+    </div>
+    <div class="divider"></div>
+    <h1 style="margin-top:20px;">Never lose<br><span class="gradient-text">another lead.</span></h1>
+    <p class="sub">Watch what happens when a lead comes in at 11:47 PM<br>and no one is at the desk.</p>
+    <div style="margin-top:36px;font-size:13px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;">CLICK ANYWHERE TO BEGIN</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 1 — THE PROBLEM
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s1">
+  <div class="eyebrow">The Problem</div>
+  <h2>Your leads aren't<br><span class="gradient-text">waiting around.</span></h2>
+  <p class="sub" style="margin-top:4px;">78% of sales go to the business that responds first.<br>Most gyms and trainers respond in 5+ hours — or never.</p>
+  <div class="card-row">
+    <div class="stat-card">
+      <div class="stat-num gradient-text">78%</div>
+      <div class="stat-label">of sales go to first responder</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:#ff4d6d;">5 hrs</div>
+      <div class="stat-label">average response time</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:#ff4d6d;">40%</div>
+      <div class="stat-label">of leads lost to slow follow-up</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 2 — THE SETUP (Dashboard)
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s2">
+  <div class="eyebrow">Client Dashboard</div>
+  <h2 style="margin-bottom:24px;">Iron Valley Fitness is<br><span class="gradient-text">fully automated.</span></h2>
+  <div class="dashboard">
+    <div class="dash-header">
+      <div>
+        <div class="dash-title">Iron Valley Fitness — Chicago, IL</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px;">AI Lead Response System</div>
+      </div>
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        LIVE 24/7
+      </div>
+    </div>
+    <div class="dash-body">
+      <div class="dash-stat">
+        <div class="dash-stat-num gradient-text">47s</div>
+        <div class="dash-stat-label">Avg. response time</div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-num" style="color:#00e676;">23</div>
+        <div class="dash-stat-label">Leads this month</div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-num" style="color:#7b61ff;">18</div>
+        <div class="dash-stat-label">Consultations booked</div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-num" style="color:#ffb400;">$3,580</div>
+        <div class="dash-stat-label">Est. new revenue</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 3 — LEAD COMES IN
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s3">
+  <div class="phone-wrap">
+    <div style="flex:1;padding-top:10px;">
+      <div class="eyebrow">11:47 PM — A lead comes in</div>
+      <h2 style="text-align:left;font-size:clamp(22px,3vw,36px);margin-bottom:16px;">
+        Mike Thompson just<br><span class="gradient-text">texted the gym.</span>
+      </h2>
+      <p class="sub" style="text-align:left;max-width:none;">He found Iron Valley on Instagram. It's almost midnight. There's nobody there to answer. Most businesses? This lead is gone by morning.</p>
+      <div style="margin-top:24px;padding:16px 20px;background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.2);border-radius:12px;">
+        <div style="font-size:12px;font-weight:700;color:#ff4d6d;margin-bottom:4px;">WITHOUT IntrospecAgentic.AI</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.55);">Lead waits. Gets no reply. Books with a competitor by 9am.</div>
+      </div>
+    </div>
+    <div class="phone" id="phone3">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="sms-header">
+          <div class="avatar">MT</div>
+          <div>
+            <div class="sms-from">Mike Thompson</div>
+            <div class="sms-sub">+1 (312) 555-0182</div>
+          </div>
+        </div>
+        <div class="sms-body">
+          <div class="bubble inbound show" id="b3a">
+            Hey, saw Iron Valley on Instagram. Do you guys offer personal training packages? Looking to get serious 💪
+            <div class="bubble-time">11:47 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 4 — AI ACTIVATES
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s4">
+  <div class="eyebrow">AI Activates</div>
+  <h2>IntrospecAgentic.AI<br><span class="gradient-text">sees the lead instantly.</span></h2>
+
+  <div style="margin:24px 0;text-align:center;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140">
+      <defs>
+        <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#00b4ff"/>
+          <stop offset="100%" style="stop-color:#7b61ff"/>
+        </linearGradient>
+      </defs>
+      <circle class="track" cx="70" cy="70" r="62" stroke="rgba(255,255,255,0.08)" fill="none" stroke-width="6"/>
+      <circle class="fill" id="timerCircle" cx="70" cy="70" r="62" stroke="url(#timerGrad)" fill="none" stroke-width="6"
+        stroke-dasharray="389.56" stroke-dashoffset="389.56" style="transform-origin:70px 70px;transform:rotate(-90deg);transition:stroke-dashoffset 0.05s linear;"/>
+    </svg>
+    <div id="timerNum" style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.5);margin-top:-8px;">Analyzing lead...</div>
+  </div>
+
+  <div class="process-bar"><div class="process-fill" id="procFill"></div></div>
+  <div class="process-step" id="procStep">Reading incoming message</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 5 — RESPONSE SENT
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s5">
+  <div class="phone-wrap">
+    <div class="phone" id="phone5">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="sms-header">
+          <div class="avatar">MT</div>
+          <div>
+            <div class="sms-from">Mike Thompson</div>
+            <div class="sms-sub">+1 (312) 555-0182</div>
+          </div>
+        </div>
+        <div class="sms-body">
+          <div class="bubble inbound show">
+            Hey, saw Iron Valley on Instagram. Do you guys offer personal training packages? Looking to get serious 💪
+            <div class="bubble-time">11:47 PM</div>
+          </div>
+          <div class="bubble outbound" id="b5a">
+            Hey Mike! Thanks for reaching out to Iron Valley 🔥 Yes — we have training packages starting at $199/month. Our coaches specialize in strength, fat loss &amp; athletic conditioning. Want to grab a free 15-min consult to find the right fit?
+            <div class="bubble-time">11:47 PM · Sent in 47 seconds ⚡</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:1;padding-top:10px;">
+      <div class="eyebrow">Response sent</div>
+      <h2 style="text-align:left;font-size:clamp(22px,3vw,36px);margin-bottom:16px;">
+        <span class="gradient-text">47 seconds.</span><br>Personalized. Automatic.
+      </h2>
+      <p class="sub" style="text-align:left;max-width:none;">While you slept, IntrospecAgentic.AI introduced your gym, highlighted your offer, and asked a qualifying question — all in under a minute.</p>
+      <div style="margin-top:24px;padding:16px 20px;background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.2);border-radius:12px;">
+        <div style="font-size:12px;font-weight:700;color:#00e676;margin-bottom:4px;">WITH IntrospecAgentic.AI</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.55);">Lead gets a personal reply in under 60 seconds. You wake up to a warm prospect.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 6 — LEAD REPLIES + BOOKING
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s6">
+  <div class="phone-wrap">
+    <div class="phone" id="phone6">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="sms-header">
+          <div class="avatar">MT</div>
+          <div>
+            <div class="sms-from">Mike Thompson</div>
+            <div class="sms-sub">+1 (312) 555-0182</div>
+          </div>
+        </div>
+        <div class="sms-body">
+          <div class="bubble outbound show" style="font-size:11px;">
+            Want to grab a free 15-min consult?
+            <div class="bubble-time">11:47 PM · 47 sec ⚡</div>
+          </div>
+          <div class="bubble inbound" id="b6a">
+            Yes! That'd be great. What times work?
+            <div class="bubble-time">11:52 PM</div>
+          </div>
+          <div class="bubble outbound" id="b6b">
+            Perfect! Grab a time that works for you 👇<br><span style="color:#7ecfff;text-decoration:underline;">calendly.com/ironvalley/consult</span>
+            <div class="bubble-time">11:52 PM · Automatic ⚡</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:1;padding-top:10px;">
+      <div class="eyebrow">The conversation continues</div>
+      <h2 style="text-align:left;font-size:clamp(22px,3vw,36px);margin-bottom:16px;">
+        Mike's interested.<br><span class="gradient-text">AI sends the booking link.</span>
+      </h2>
+      <p class="sub" style="text-align:left;max-width:none;">The system follows the conversation, handles the reply, and sends the Calendly link — all without anyone at the keyboard.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 7 — BOOKING CONFIRMED
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s7">
+  <div class="eyebrow" style="text-align:center;">Booking Confirmed</div>
+  <div class="cal-card">
+    <div class="cal-check">✓</div>
+    <div class="cal-name">Mike Thompson</div>
+    <div class="cal-type">Free Consultation — Iron Valley Fitness</div>
+    <div class="cal-time">📅 &nbsp; Thursday, May 15 · 2:00 PM CDT</div>
+    <div class="cal-note">Booked automatically · No human involved</div>
+  </div>
+  <p class="sub" style="margin-top:24px;">You wake up, check your calendar, and Mike is on it.<br>You didn't do a thing.</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 8 — RESULTS
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s8">
+  <div class="eyebrow">What just happened</div>
+  <h2 style="margin-bottom:28px;"><span class="gradient-text">One lead. Zero effort.</span><br>Fully automated.</h2>
+  <div class="result-row" id="r1">
+    <div class="result-icon">⚡</div>
+    <div>
+      <div class="result-label">Response time</div>
+      <div class="result-val">47 seconds — while you slept</div>
+    </div>
+  </div>
+  <div class="result-row" id="r2">
+    <div class="result-icon">📅</div>
+    <div>
+      <div class="result-label">Consultation booked</div>
+      <div class="result-val">Automatic — no back-and-forth</div>
+    </div>
+  </div>
+  <div class="result-row" id="r3">
+    <div class="result-icon">💰</div>
+    <div>
+      <div class="result-label">Potential value</div>
+      <div class="result-val">$199+/month — recovered from zero</div>
+    </div>
+  </div>
+  <div class="result-row" id="r4">
+    <div class="result-icon">🔁</div>
+    <div>
+      <div class="result-label">This system runs</div>
+      <div class="result-val">24 hours a day · 7 days a week</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCENE 9 — CTA
+     ═══════════════════════════════════════ -->
+<div class="scene" id="s9">
+  <div style="text-align:center;">
+    <div style="font-size:clamp(18px,2.5vw,26px);font-weight:800;letter-spacing:0.04em;margin-bottom:12px;">
+      <span class="gradient-text">IntrospecAgentic.AI</span>
+    </div>
+    <h1 style="font-size:clamp(30px,5vw,56px);">Ready to put your<br>lead response on autopilot?</h1>
+    <p class="sub" style="margin-top:12px;">Let's do a live walkthrough of the system<br>built specifically for your business.</p>
+    <a class="cta-btn" href="https://calendly.com" target="_blank" onclick="event.stopPropagation();">
+      📅 &nbsp; Book a Free 15-Min Demo
+    </a>
+    <div style="margin-top:24px;font-size:13px;color:rgba(255,255,255,0.25);">No commitment · No tech knowledge required</div>
+  </div>
+</div>
+
+<script>
+  const scenes = document.querySelectorAll('.scene');
+  const dots = document.getElementById('progress');
+  const hint = document.getElementById('hint');
+  const logoSm = document.getElementById('logoSm');
+  let current = 0;
+  const total = scenes.length;
+
+  // Build dots
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    dots.appendChild(d);
+  }
+
+  function getDots() { return dots.querySelectorAll('.dot'); }
+
+  function goTo(n) {
+    scenes[current].classList.remove('active');
+    getDots()[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, total - 1));
+    scenes[current].classList.add('active');
+    getDots()[current].classList.add('active');
+    onEnter(current);
+  }
+
+  function next() {
+    if (current < total - 1) goTo(current + 1);
+  }
+
+  document.addEventListener('click', next);
+  document.addEventListener('touchend', e => { e.preventDefault(); next(); }, { passive: false });
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space' || e.code === 'ArrowRight') { e.preventDefault(); next(); }
+    if (e.code === 'ArrowLeft') { e.preventDefault(); if (current > 0) goTo(current - 1); }
+  });
+
+  // Scene entry hooks
+  function onEnter(n) {
+    if (n > 0) logoSm.classList.add('show');
+    if (n === 0) logoSm.classList.remove('show');
+    hint.style.opacity = n === total - 1 ? '0' : '0.6';
+    document.getElementById('nextBtn').style.display = n === total - 1 ? 'none' : 'block';
+
+    if (n === 3) triggerScene3();
+    if (n === 4) triggerScene4();
+    if (n === 5) triggerScene5();
+    if (n === 6) triggerScene6();
+    if (n === 8) triggerScene8();
+  }
+
+  // Scene 3 — alert toast
+  function triggerScene3() {
+    setTimeout(() => {
+      document.getElementById('alertToast').classList.add('show');
+    }, 600);
+    setTimeout(() => {
+      document.getElementById('alertToast').classList.remove('show');
+    }, 4000);
+  }
+
+  // Scene 4 — timer animation
+  let timerInterval;
+  function triggerScene4() {
+    const circle = document.getElementById('timerCircle');
+    const numEl = document.getElementById('timerNum');
+    const fill = document.getElementById('procFill');
+    const step = document.getElementById('procStep');
+    const circ = 2 * Math.PI * 62;
+    let t = 0;
+    const total = 47;
+
+    clearInterval(timerInterval);
+    circle.style.strokeDashoffset = circ;
+    fill.classList.remove('go');
+    numEl.textContent = 'Analyzing lead...';
+    step.textContent = 'Reading incoming message';
+
+    setTimeout(() => fill.classList.add('go'), 200);
+
+    const steps = [
+      [0, 'Reading incoming message'],
+      [15, 'Identifying lead intent'],
+      [28, 'Personalizing response'],
+      [40, 'Sending reply... ⚡'],
+    ];
+
+    timerInterval = setInterval(() => {
+      t++;
+      const progress = t / total;
+      circle.style.strokeDashoffset = circ * (1 - progress);
+      numEl.textContent = t < total ? `${t}s` : '47s ✓';
+
+      steps.forEach(([threshold, label]) => {
+        if (t === threshold) step.textContent = label;
+      });
+
+      if (t >= total) {
+        clearInterval(timerInterval);
+        numEl.textContent = '47s ✓';
+        numEl.style.color = '#00e676';
+      }
+    }, 80);
+  }
+
+  // Scene 5 — bubble animation
+  function triggerScene5() {
+    setTimeout(() => {
+      const b = document.getElementById('b5a');
+      if (b) b.classList.add('show');
+    }, 800);
+  }
+
+  // Scene 6 — staggered bubbles
+  function triggerScene6() {
+    setTimeout(() => {
+      const b = document.getElementById('b6a');
+      if (b) b.classList.add('show');
+    }, 600);
+    setTimeout(() => {
+      const b = document.getElementById('b6b');
+      if (b) b.classList.add('show');
+    }, 1800);
+  }
+
+  // Scene 8 — staggered result rows
+  function triggerScene8() {
+    ['r1','r2','r3','r4'].forEach((id, i) => {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('show');
+      }, 300 + i * 250);
+    });
+  }
+
+  // Init
+  onEnter(0);
+  hint.style.opacity = '0.6';
+</script>
+</body>
+</html>
