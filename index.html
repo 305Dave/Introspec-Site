@@ -287,6 +287,32 @@
     .results-grid { grid-template-columns: repeat(2, 1fr); }
     .problem-grid { grid-template-columns: 1fr; }
   }
+
+.nav-founder-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 4px 12px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-founder-btn:hover {
+  color: rgba(255, 255, 255, 0.82);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.nav-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
 </style>
 </head>
 <body>
@@ -297,7 +323,10 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
+    <div class="nav-left">
     <div class="logo"><span class="grad">IntrospecAgentic.AI</span></div>
+    <a href="#founder" class="nav-founder-btn">↓ Why I Built This</a>
+  </div>
     <a href="#cta" class="nav-cta">📅 &nbsp;Book a Free Demo</a>
   </div>
 </nav>
