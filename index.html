@@ -343,32 +343,25 @@
   gap: 10px;
 }
   /* ── Demo advance button ── */
-  .sms-card { position: relative; }
   .demo-next-btn {
-    position: absolute;
-    bottom: 14px;
-    right: 14px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    display: block;
+    width: calc(100% - 28px);
+    margin: 16px auto 0;
+    padding: 13px 24px;
+    border-radius: 14px;
     background: linear-gradient(135deg, var(--blue), var(--purple));
     border: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    box-shadow: 0 4px 16px rgba(0,180,255,0.35);
+    letter-spacing: 0.01em;
+    box-shadow: 0 4px 20px rgba(0,180,255,0.4);
     transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.3s ease;
-    z-index: 10;
-    line-height: 1;
-    text-decoration: none;
   }
-  .demo-next-btn:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(0,180,255,0.55); }
-  .demo-next-btn:active { transform: scale(0.94); }
-  .demo-next-btn.done { opacity: 0.28; cursor: default; pointer-events: none; }
+  .demo-next-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,180,255,0.55); }
+  .demo-next-btn:active { transform: scale(0.97); }
+  .demo-next-btn.done { opacity: 0; pointer-events: none; }
   .sms-body .bubble { transition: opacity 0.35s ease, transform 0.35s ease; }
   .sms-body .bubble.hidden { display: none; }
   .sms-body .bubble.demo-in { animation: demoBubble 0.35s ease both; }
@@ -539,7 +532,7 @@
               </div>
             </div>
           </div>
-          <button class="demo-next-btn" id="demoNext" title="Next step">&#8594;</button>
+          <button class="demo-next-btn" id="demoNext">Tap to continue →</button>
         </div>
       </div>
     </div>
