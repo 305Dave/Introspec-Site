@@ -877,7 +877,10 @@
     <form id="email-capture-form" action="https://formsubmit.co/david@introspecagentic.ai" method="post" name="email-capture" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto;">
       <input type="hidden" name="_subject" value="New Lead from IntrospecAgentic.AI">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="form-name" value="email-capture"><input type="email" name="email" placeholder="your@email.com" required style="flex:1;min-width:220px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:50px;color:var(--text);font-size:15px;outline:none;">
+      <input type="hidden" name="form-name" value="email-capture">
+      <input type="hidden" name="_next" value="https://introspecagentic.ai?submitted=true">
+      <input type="text" name="name" placeholder="Your name" required style="flex:1;min-width:220px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:50px;color:var(--text);font-size:15px;outline:none;">
+      <input type="email" name="email" placeholder="your@email.com" required style="flex:1;min-width:220px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:50px;color:var(--text);font-size:15px;outline:none;">
       <button type="submit" style="padding:16px 32px;background:var(--green);color:#07090f;font-size:15px;font-weight:700;border:none;border-radius:50px;cursor:pointer;white-space:nowrap;">Stay Updated</button>
             <p style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:10px;max-width:480px;margin-left:auto;margin-right:auto;text-align:center;">By submitting this form, you agree to receive automated text messages and emails from IntrospecAgentic.AI. Message and data rates may apply. Reply STOP to opt out.</p>        </form><div id="email-thankyou" style="display:none;padding:32px 20px;color:#fff;font-size:18px;font-weight:500;text-align:center;letter-spacing:-0.02em;">Thanks for signing up! Stay tuned for news and updates.</div>
   </div>
