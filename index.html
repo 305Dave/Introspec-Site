@@ -10,7 +10,7 @@
     --purple: #7b61ff;
     --pink: #ff61ab;
     --green: #00e676;
-    --bg: #07090f;
+    --bg: #07090f;h
     --surface: rgba(255,255,255,0.04);
     --border: rgba(255,255,255,0.08);
     --text: #fff;
@@ -874,11 +874,11 @@
     <p class="eyebrow">Stay in the Loop</p>
     <h2 style="font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.1;letter-spacing:-0.03em;margin-bottom:12px;">Built to keep you<br><span class="grad">ahead of the curve.</span></h2>
     <p style="color:var(--muted);font-size:17px;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto;">AI automation insights for your business. No spam.</p>
-    <form id="email-capture-form" action="https://formsubmit.co/david@introspecagentic.ai" method="post" name="email-capture" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto;">
-      <input type="hidden" name="_subject" value="New Lead from IntrospecAgentic.AI">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="form-name" value="email-capture">
-      <input type="hidden" name="_next" value="https://introspecagentic.ai?submitted=true">
+    <form id="email-capture-form" action="/?submitted=true" method="post" name="contact" data-netlify="true" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto;">
+      
+      
+      <input type="hidden" name="form-name" value="contact">
+      
       <input type="text" name="name" placeholder="Your name" required style="flex:1;min-width:220px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:50px;color:var(--text);font-size:15px;outline:none;">
       <input type="email" name="email" placeholder="your@email.com" required style="flex:1;min-width:220px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:50px;color:var(--text);font-size:15px;outline:none;">
       <button type="submit" style="padding:16px 32px;background:var(--green);color:#07090f;font-size:15px;font-weight:700;border:none;border-radius:50px;cursor:pointer;white-space:nowrap;">Stay Updated</button>
