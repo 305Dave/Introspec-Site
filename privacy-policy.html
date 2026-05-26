@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | IntrospecAgentic.AI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0f;
+      --surface:   #111118;
+      --border:    #1e1e2e;
+      --accent:    #6c63ff;
+      --accent2:   #a78bfa;
+      --text:      #e4e4f0;
+      --muted:     #8888aa;
+      --white:     #ffffff;
+      --radius:    10px;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    /* ââ Header ââ */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+    .logo-text span { color: var(--accent2); }
+
+    /* ââ Hero ââ */
+    .hero {
+      background: linear-gradient(180deg, #12121f 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(108, 99, 255, 0.15);
+      border: 1px solid rgba(108, 99, 255, 0.35);
+      color: var(--accent2);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ââ Main layout ââ */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* ââ Sections ââ */
+    .section {
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: rgba(108, 99, 255, 0.15);
+      border: 1px solid rgba(108, 99, 255, 0.3);
+      color: var(--accent2);
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      letter-spacing: -0.2px;
+    }
+
+    p { color: var(--text); margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 14px;
+    }
+    li {
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    li:last-child { margin-bottom: 0; }
+
+    /* ââ Callout boxes ââ */
+    .callout {
+      background: rgba(108, 99, 255, 0.08);
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+    .callout.green {
+      background: rgba(52, 211, 153, 0.06);
+      border-color: rgba(52, 211, 153, 0.25);
+      border-left-color: #34d399;
+    }
+    .callout p { color: var(--text); margin: 0; font-size: 0.95rem; }
+    .callout strong { color: var(--white); }
+
+    /* ââ Third-party table ââ */
+    .provider-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .provider-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 8px 16px;
+      align-items: start;
+    }
+    .provider-name {
+      font-weight: 700;
+      color: var(--accent2);
+      font-size: 0.9rem;
+    }
+    .provider-desc {
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+    .provider-privacy {
+      grid-column: 2;
+      font-size: 0.8rem;
+    }
+    .provider-privacy a {
+      color: var(--accent2);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .provider-privacy a:hover { opacity: 1; text-decoration: underline; }
+
+    /* ââ SMS highlight ââ */
+    .sms-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 20px;
+    }
+    .sms-box h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tag {
+      display: inline-block;
+      background: rgba(108, 99, 255, 0.2);
+      color: var(--accent2);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ââ Contact card ââ */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 18px;
+    }
+    .contact-card p { margin: 0 0 6px; }
+    .contact-card a {
+      color: var(--accent2);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* ââ Footer ââ */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    footer p {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin: 0;
+    }
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .provider-card { grid-template-columns: 1fr; }
+      .provider-privacy { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <div class="logo-mark">I</div>
+    <div class="logo-text">Introspec<span>Agentic</span>.AI</div>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p>Effective Date: May 26, 2026 &nbsp;Â·&nbsp; IntrospecAgentic.AI</p>
+</div>
+
+<!-- Content -->
+<div class="container">
+
+  <!-- Intro -->
+  <div class="section">
+    <p>IntrospecAgentic.AI ("Company," "we," "us," or "our") operates an AI-powered lead-response service for med spas and wellness businesses. This Privacy Policy explains what personal information we collect, how we use it, who we share it with, and your rights regarding that information.</p>
+    <p>By using our website, submitting a form, or receiving communications from us or our clients' AI lead-response system, you agree to the practices described in this policy.</p>
+
+    <div class="callout">
+      <p><strong>Plain-English Summary:</strong> We collect only the information needed to deliver our service. We do not sell your personal data. SMS opt-out is always available by replying <strong>STOP</strong>.</p>
+    </div>
+  </div>
+
+  <!-- 1. Information We Collect -->
+  <div class="section">
+    <div class="section-num">1</div>
+    <h2>Information We Collect</h2>
+    <p>We collect information you provide directly when you or a lead interacts with our service â including through intake forms, booking tools, or AI-driven chat and SMS flows. This may include:</p>
+    <ul>
+      <li><strong>Contact Information:</strong> Full name, email address, and phone number</li>
+      <li><strong>Inquiry Details:</strong> Service interests, questions, or appointment preferences submitted via a form or message</li>
+      <li><strong>Communication Records:</strong> Content of SMS messages, emails, or chat interactions with our AI lead-response system</li>
+      <li><strong>Technical Data:</strong> Basic usage data such as IP address, browser type, and page visits (collected automatically via standard web technologies)</li>
+    </ul>
+    <p>We do not knowingly collect sensitive personal information (e.g., health records, financial data, or data from individuals under 13 years of age).</p>
+  </div>
+
+  <!-- 2. How We Use Your Information -->
+  <div class="section">
+    <div class="section-num">2</div>
+    <h2>How We Use Your Information</h2>
+    <p>We use the information we collect solely to deliver and improve our AI lead-response service. Specifically:</p>
+    <ul>
+      <li>To respond to inquiries and qualify leads on behalf of our business clients</li>
+      <li>To send automated SMS and email messages as part of the AI lead-response workflow</li>
+      <li>To schedule appointments or follow-up conversations via connected booking tools</li>
+      <li>To provide client-facing reporting and analytics on lead activity</li>
+      <li>To comply with legal obligations, including telecom regulations (e.g., TCPA, 10DLC)</li>
+      <li>To improve the performance and accuracy of our AI system</li>
+    </ul>
+    <p>We do not use personal information for behavioral advertising, cross-site tracking, or any purpose unrelated to the services described above.</p>
+  </div>
+
+  <!-- 3. SMS Messaging -->
+  <div class="section">
+    <div class="section-num">3</div>
+    <h2>SMS Messaging &amp; Telephone Communications</h2>
+    <p>IntrospecAgentic.AI uses SMS messaging as part of its AI lead-response service, delivered via Twilio's 10DLC registered messaging infrastructure.</p>
+
+    <div class="sms-box">
+      <h3>Your SMS Rights <span class="tag">10DLC Compliant</span></h3>
+      <ul>
+        <li><strong>Consent:</strong> By submitting your phone number through a lead form or opting into communications from one of our clients, you consent to receive SMS messages related to that business's services.</li>
+        <li><strong>Message Frequency:</strong> Message frequency varies based on your inquiry and follow-up activity. Typical usage is 2â5 messages per lead interaction.</li>
+        <li><strong>Opt-Out:</strong> You may opt out at any time by replying <strong>STOP</strong> to any SMS message. You will receive a one-time confirmation and no further messages will be sent.</li>
+        <li><strong>Help:</strong> Reply <strong>HELP</strong> for assistance or contact us at <a href="mailto:david@introspecagentic.ai" style="color: #a78bfa;">david@introspecagentic.ai</a>.</li>
+        <li><strong>No Third-Party Sharing:</strong> Phone numbers and SMS opt-in data are never sold, rented, or shared with third parties for marketing purposes.</li>
+        <li><strong>Carrier Disclaimer:</strong> Message and data rates may apply. Carriers are not liable for delayed or undelivered messages.</li>
+      </ul>
+    </div>
+
+    <div class="callout green" style="margin-top: 18px;">
+      <p><strong>Important:</strong> No mobile information â including phone numbers collected for SMS â will be shared with or sold to third parties or affiliates for marketing or promotional purposes.</p>
+    </div>
+  </div>
+
+  <!-- 4. How We Share Your Information -->
+  <div class="section">
+    <div class="section-num">4</div>
+    <h2>How We Share Your Information</h2>
+    <p>We do not sell, rent, or trade personal information. We share data only in the following limited circumstances:</p>
+    <ul>
+      <li><strong>With Our Clients:</strong> We share lead information (name, email, phone, inquiry details) with the med spa or wellness business that engaged our service on your behalf â this is the core purpose of our service.</li>
+      <li><strong>With Service Providers:</strong> We use trusted third-party tools to operate our service (see Section 5). These providers access data only as needed to perform their functions and are contractually bound to protect it.</li>
+      <li><strong>Legal Compliance:</strong> We may disclose information if required by law, court order, or to protect the rights, safety, or property of IntrospecAgentic.AI or others.</li>
+      <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, personal data may be transferred as part of that transaction, subject to equivalent privacy protections.</li>
+    </ul>
+    <p>We do not share personal information for third-party advertising, behavioral targeting, or data broker purposes.</p>
+  </div>
+
+  <!-- 5. Third-Party Services -->
+  <div class="section">
+    <div class="section-num">5</div>
+    <h2>Third-Party Services We Use</h2>
+    <p>Our service integrates with the following third-party platforms to deliver core functionality. Each provider has its own privacy policy governing how they handle data.</p>
+
+    <div class="provider-grid">
+      <div class="provider-card">
+        <div class="provider-name">Twilio</div>
+        <div class="provider-desc">Powers SMS messaging delivery and phone number management for our AI lead-response workflows. All SMS traffic is sent through Twilio's 10DLC registered infrastructure.</div>
+        <div class="provider-privacy"><a href="https://www.twilio.com/en-us/legal/privacy" target="_blank" rel="noopener">twilio.com/legal/privacy â</a></div>
+      </div>
+
+      <div class="provider-card">
+        <div class="provider-name">Google / Gmail</div>
+        <div class="provider-desc">Used for email-based lead communication and service delivery. Email data is processed through Google Workspace.</div>
+        <div class="provider-privacy"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy â</a></div>
+      </div>
+
+      <div class="provider-card">
+        <div class="provider-name">Tally</div>
+        <div class="provider-desc">Powers lead capture forms embedded on client websites. Form submission data (name, email, phone) flows into our AI response system.</div>
+        <div class="provider-privacy"><a href="https://tally.so/privacy" target="_blank" rel="noopener">tally.so/privacy â</a></div>
+      </div>
+
+      <div class="provider-card">
+        <div class="provider-name">Calendly</div>
+        <div class="provider-desc">Used for appointment scheduling and booking links. When a lead books a call, Calendly processes their name, email, and scheduling preferences.</div>
+        <div class="provider-privacy"><a href="https://calendly.com/privacy" target="_blank" rel="noopener">calendly.com/privacy â</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Data Storage and Security -->
+  <div class="section">
+    <div class="section-num">6</div>
+    <h2>Data Storage &amp; Security</h2>
+    <p>We store data using industry-standard cloud infrastructure. We implement reasonable administrative, technical, and physical safeguards to protect your personal information from unauthorized access, disclosure, alteration, or destruction.</p>
+    <p>Measures include:</p>
+    <ul>
+      <li>Encrypted data transmission (HTTPS/TLS)</li>
+      <li>Access controls and authentication for internal systems</li>
+      <li>Limited data retention â we retain lead data only as long as necessary to fulfill our service obligations or legal requirements</li>
+      <li>Reliance on SOC 2-compliant vendors (Twilio, Google) for sensitive data handling</li>
+    </ul>
+    <p>No method of electronic transmission or storage is 100% secure. While we take reasonable precautions, we cannot guarantee absolute security.</p>
+  </div>
+
+  <!-- 7. Data Retention -->
+  <div class="section">
+    <div class="section-num">7</div>
+    <h2>Data Retention</h2>
+    <p>We retain personal information for as long as is reasonably necessary to provide our service, maintain business records, or comply with applicable legal obligations. Lead contact data is generally retained for the duration of our client engagement plus a standard business records period not to exceed three (3) years, unless a deletion request is received sooner.</p>
+    <p>When data is no longer needed, we delete or anonymize it in a commercially reasonable manner.</p>
+  </div>
+
+  <!-- 8. Your Rights -->
+  <div class="section">
+    <div class="section-num">8</div>
+    <h2>Your Rights</h2>
+    <p>Regardless of your location, you have the following rights with respect to your personal information:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of the personal information we hold about you.</li>
+      <li><strong>Correction:</strong> Ask us to correct inaccurate or incomplete information.</li>
+      <li><strong>Deletion:</strong> Request that we delete your personal data. We will honor such requests unless retention is required by law or legitimate business necessity.</li>
+      <li><strong>Opt-Out of SMS:</strong> Reply STOP to any SMS message, at any time.</li>
+      <li><strong>Opt-Out of Email:</strong> Click the unsubscribe link in any marketing email, or contact us directly.</li>
+      <li><strong>Data Portability:</strong> Request a portable copy of your data where technically feasible.</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:david@introspecagentic.ai" style="color: #a78bfa;">david@introspecagentic.ai</a>. We will respond within 30 days.</p>
+  </div>
+
+  <!-- 9. No Sale of Personal Data -->
+  <div class="section">
+    <div class="section-num">9</div>
+    <h2>No Sale of Personal Data</h2>
+    <div class="callout green">
+      <p><strong>We do not sell personal information.</strong> We do not sell, rent, or otherwise exchange your personal data â including phone numbers, email addresses, or any other contact information â to third parties for commercial or marketing purposes. This includes data collected via SMS opt-ins, lead capture forms, or any other channel.</p>
+    </div>
+  </div>
+
+  <!-- 10. Children's Privacy -->
+  <div class="section">
+    <div class="section-num">10</div>
+    <h2>Children's Privacy</h2>
+    <p>Our services are intended for business clients and their adult leads. We do not knowingly collect personal information from individuals under the age of 13. If we become aware that we have inadvertently collected such information, we will delete it promptly.</p>
+  </div>
+
+  <!-- 11. Governing Law -->
+  <div class="section">
+    <div class="section-num">11</div>
+    <h2>Governing Law</h2>
+    <p>This Privacy Policy is governed by and construed in accordance with the laws of the United States. Any disputes arising in connection with this policy shall be subject to applicable federal law and the laws of the state in which IntrospecAgentic.AI is principally operated.</p>
+  </div>
+
+  <!-- 12. Changes -->
+  <div class="section">
+    <div class="section-num">12</div>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we do, we will revise the effective date at the top of this page. For material changes, we will provide additional notice where practicable (such as via email or a website notice). Continued use of our services after a policy update constitutes acceptance of the revised terms.</p>
+  </div>
+
+  <!-- 13. Contact -->
+  <div class="section">
+    <div class="section-num">13</div>
+    <h2>Contact Us</h2>
+    <p>For privacy-related questions, data requests, or to exercise your rights, please contact:</p>
+    <div class="contact-card">
+      <p><strong style="color: #fff;">IntrospecAgentic.AI</strong></p>
+      <p>Privacy Inquiries</p>
+      <p>Email: <a href="mailto:david@introspecagentic.ai">david@introspecagentic.ai</a></p>
+      <p style="margin-top: 10px; color: #8888aa; font-size: 0.875rem;">We aim to respond to all privacy requests within 30 days of receipt.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>
+    &copy; 2026 IntrospecAgentic.AI &nbsp;Â·&nbsp; All rights reserved
+    &nbsp;Â·&nbsp;
+    <a href="mailto:david@introspecagentic.ai">david@introspecagentic.ai</a>
+  </p>
+  <p style="margin-top: 6px;">Effective Date: May 26, 2026</p>
+</footer>
+
+</body>
+</html>
