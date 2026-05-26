@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IntrospecAgentic.AI â Never Lose Another Lead</title>
+<title>IntrospecAgentic.AI — Never Lose Another Lead</title>
 <style>
   :root {
     --blue: #00b4ff;
@@ -28,7 +28,7 @@
     overflow-x: hidden;
   }
 
-  /* ââ Background ââ */
+  /* ── Background ── */
   .bg-layer {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background:
@@ -44,7 +44,7 @@
     background-size: 50px 50px;
   }
 
-  /* ââ Utility ââ */
+  /* ── Utility ── */
   .grad { background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 60%, var(--pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .grad-bg { background: linear-gradient(135deg, var(--blue), var(--purple)); }
   .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
@@ -54,7 +54,7 @@
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px; backdrop-filter: blur(10px); }
   .tag { display: inline-block; background: rgba(0,180,255,0.1); border: 1px solid rgba(0,180,255,0.25); border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--blue); letter-spacing: 0.05em; }
 
-  /* ââ Nav ââ */
+  /* ── Nav ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(7,9,15,0.85);
@@ -79,7 +79,7 @@
   }
   .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(0,180,255,0.35); }
 
-  /* ââ Hero ââ */
+  /* ── Hero ── */
   .hero-logo {
     width: 300px;
     max-width: 60vw;
@@ -158,7 +158,7 @@
   .hero-stat-num { font-size: 36px; font-weight: 900; letter-spacing: -0.02em; }
   .hero-stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
-  /* ââ Problem ââ */
+  /* ── Problem ── */
   #problem { background: linear-gradient(180deg, transparent, rgba(255,77,109,0.04) 50%, transparent); }
   #problem h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; text-align: center; margin-bottom: 12px; }
   #problem .sub { font-size: clamp(15px, 2vw, 18px); color: var(--muted); text-align: center; max-width: 560px; margin: 0 auto 56px; line-height: 1.7; }
@@ -171,7 +171,7 @@
   .problem-num { font-size: 44px; font-weight: 900; letter-spacing: -0.03em; color: #ff4d6d; margin-bottom: 8px; }
   .problem-label { font-size: 14px; color: var(--muted); line-height: 1.5; }
 
-  /* ââ How It Works ââ */
+  /* ── How It Works ── */
   #how { text-align: center; }
   #how h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 12px; }
   #how .sub { font-size: clamp(15px, 2vw, 18px); color: var(--muted); max-width: 520px; margin: 0 auto 64px; line-height: 1.7; }
@@ -195,7 +195,7 @@
   .step h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
   .step p { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
-  /* ââ Live Preview ââ */
+  /* ── Live Preview ── */
   #preview { background: rgba(0,180,255,0.02); }
   .preview-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
   .preview-text h2 { font-size: clamp(26px, 3.5vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px; }
@@ -232,7 +232,7 @@
   .outbound { background: linear-gradient(135deg, #0a84ff, #5e5ce6); border-bottom-right-radius: 3px; align-self: flex-end; text-align: right; }
   .btime { font-size: 9px; color: var(--muted); margin-top: 3px; }
 
-  /* ââ Results ââ */
+  /* ── Results ── */
   #results { text-align: center; }
   #results h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 56px; }
   .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -241,7 +241,7 @@
   .result-num { font-size: 38px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 8px; }
   .result-label { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
-  /* ââ Who it's for ââ */
+  /* ── Who it's for ── */
   #who h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; text-align: center; margin-bottom: 48px; }
   .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .who-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; }
@@ -249,7 +249,7 @@
   .who-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
   .who-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
-  /* ââ CTA ââ */
+  /* ── CTA ── */
   #cta {
     text-align: center;
     padding: 120px 24px;
@@ -265,7 +265,7 @@
   #cta p { font-size: clamp(16px, 2vw, 20px); color: var(--muted); max-width: 520px; margin: 0 auto 48px; line-height: 1.7; }
   .cta-note { font-size: 13px; color: rgba(255,255,255,0.25); margin-top: 20px; }
 
-  /* ââ Footer ââ */
+  /* ── Footer ── */
   footer {
     border-top: 1px solid var(--border);
     padding: 40px 0;
@@ -276,7 +276,7 @@
   }
   footer .logo { font-size: 15px; font-weight: 800; display: block; margin-bottom: 12px; }
 
-  /* ââ Responsive ââ */
+  /* ── Responsive ── */
   @media (max-width: 768px) {
     #hero { align-items: stretch; text-align: center; }
     #hero > * { max-width: 100%; box-sizing: border-box; }
@@ -346,7 +346,7 @@
   align-items: flex-start;
   gap: 10px;
 }
-  /* ââ Demo advance button ââ */
+  /* ── Demo advance button ── */
   .demo-btn-wrap { display: flex; justify-content: center; width: 100%; }
   .demo-next-btn {
     display: block;
@@ -411,7 +411,7 @@
     <div class="logo"><span class="grad">IntrospecAgentic.AI</span></div>
     <a href="#founder" class="nav-founder-btn">My Purpose</a>
   </div>
-    <a href="#cta" class="nav-cta">ð &nbsp;Book a Free Demo</a>
+    <a href="#cta" class="nav-cta">📅 &nbsp;Book a Free Demo</a>
   </div>
 <a href="#cta" class="nav-demo-btn">See It In Action</a>
 </nav>
@@ -428,12 +428,12 @@
   <h1>Your competition sleeps. Your pipeline doesn't.</h1>
 
   <p class="hero-sub">
-    Introspec Agentic builds systems that respond to every inquiry in under 60 seconds â personalized, on-brand, and ready to book â even at midnight.
+    Introspec Agentic builds systems that respond to every inquiry in under 60 seconds — personalized, on-brand, and ready to book — even at midnight.
   </p>
 
   <div class="hero-ctas">
-    <a href="#cta" class="btn-primary">ð &nbsp;Book a Free 30-Min Demo</a>
-    <a href="#how" class="btn-ghost">See How It Works â</a>
+    <a href="#cta" class="btn-primary">📅 &nbsp;Book a Free 30-Min Demo</a>
+    <a href="#how" class="btn-ghost">See How It Works →</a>
   </div>
 
   <div class="hero-stats">
@@ -459,7 +459,7 @@
   <div class="container">
     <div class="eyebrow" style="text-align:center;">The Problem</div>
     <h2>Your leads aren't<br><span style="color:#ff4d6d;">waiting around.</span></h2>
-    <p class="sub">Most gyms, trainers, and studios respond hours too late â or never. That lead you worked hard to get? Gone to a competitor by morning.</p>
+    <p class="sub">Most gyms, trainers, and studios respond hours too late — or never. That lead you worked hard to get? Gone to a competitor by morning.</p>
     <div class="problem-grid">
       <div class="problem-card">
         <div class="problem-num">78%</div>
@@ -487,7 +487,7 @@
       <div class="step">
         <div class="step-num">1</div>
         <h3>Lead comes in</h3>
-        <p>A prospect texts, DMs, or fills out your form â any time of day or night.</p>
+        <p>A prospect texts, DMs, or fills out your form — any time of day or night.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
@@ -497,7 +497,7 @@
       <div class="step">
         <div class="step-num">3</div>
         <h3>Booking confirmed</h3>
-        <p>The AI qualifies the lead and sends your Calendly link â consultation booked automatically.</p>
+        <p>The AI qualifies the lead and sends your Calendly link — consultation booked automatically.</p>
       </div>
     </div>
   </div>
@@ -505,7 +505,7 @@
 
 <!-- HOW IT WORKS DEMO CTA -->
 <div style="text-align:center; margin: 56px auto 0; padding: 0 24px;">
-  <a href="https://calendly.com/david-introspecagentic/30min" class="btn-primary">Book a Free 30-Min Demo â</a>
+  <a href="https://calendly.com/david-introspecagentic/30min" class="btn-primary">Book a Free 30-Min Demo →</a>
 </div>
 
 <!-- LIVE PREVIEW -->
@@ -515,22 +515,22 @@
       <div class="preview-text">
         <div class="eyebrow">See It In Action</div>
         <h2>A lead at 11:47 PM.<br><span class="grad">Booked by 11:52.</span></h2>
-        <p>While you're asleep, IntrospecAgentic.AI introduces your business, highlights your offer, and sends the booking link â all in under 5 minutes.</p>
+        <p>While you're asleep, IntrospecAgentic.AI introduces your business, highlights your offer, and sends the booking link — all in under 5 minutes.</p>
         <div class="feature-list">
           <div class="feature-item">
-            <div class="feature-check">â</div>
-            <div class="feature-text">Personalized response â not a generic bot reply</div>
+            <div class="feature-check">✓</div>
+            <div class="feature-text">Personalized response — not a generic bot reply</div>
           </div>
           <div class="feature-item">
-            <div class="feature-check">â</div>
+            <div class="feature-check">✓</div>
             <div class="feature-text">Handles follow-up questions automatically</div>
           </div>
           <div class="feature-item">
-            <div class="feature-check">â</div>
+            <div class="feature-check">✓</div>
             <div class="feature-text">Sends your Calendly link at the right moment</div>
           </div>
           <div class="feature-item">
-            <div class="feature-check">â</div>
+            <div class="feature-check">✓</div>
             <div class="feature-text">Works while you sleep, train, or focus on clients</div>
           </div>
         </div>
@@ -548,12 +548,12 @@
             </div>
             <div class="sms-body">
               <div class="bubble inbound">
-                Hi, I saw your ad online. Do you offer Botox consultations? I've never done it before and have some questions ðª
+                Hi, I saw your ad online. Do you offer Botox consultations? I've never done it before and have some questions 💪
                 <div class="btime">11:47 PM</div>
               </div>
               <div class="bubble outbound">
                 Hi Sarah! Thanks for reaching out 😊 Yes — we offer Botox consultations with our medical team. It's a great starting point, especially for first-timers. Want to grab a quick 30-min consult so we can walk you through everything??
-                <div class="btime">11:47 PM Â· Sent in 47 seconds â¡</div>
+                <div class="btime">11:47 PM Â· Sent in 47 seconds ⚡</div>
               </div>
               <div class="bubble inbound">
                 Yes that sounds perfect! What does a consultation cost?
@@ -561,7 +561,7 @@
               </div>
               <div class="bubble outbound">
                 The consult is complimentary — no charge. We just want to make sure it’s a great fit for you before anything else. Here’s a link to grab a time 📅<br><a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="color:#7ecfff;text-decoration:underline;">calendly.com/david-introspecagentic/30min</a>
-                <div class="btime">11:52 PM Â· Automatic â¡</div>
+                <div class="btime">11:52 PM Â· Automatic ⚡</div>
               </div>
             </div>
           </div>
@@ -569,7 +569,7 @@
       </div>
     </div>
     <div class="demo-btn-wrap">
-      <button class="demo-next-btn" id="demoNext">Tap to continue â</button>
+      <button class="demo-next-btn" id="demoNext">Tap to continue →</button>
     </div>
   </div>
 </section>
@@ -581,22 +581,22 @@
     <h2>One lead. <span class="grad">Zero effort.</span></h2>
     <div class="results-grid">
       <div class="result-card">
-        <div class="result-icon">â¡</div>
+        <div class="result-icon">⚡</div>
         <div class="result-num grad">47s</div>
         <div class="result-label">Response time<br>while you slept</div>
       </div>
       <div class="result-card">
-        <div class="result-icon">ð</div>
+        <div class="result-icon">📅</div>
         <div class="result-num" style="color:#00e676;">Auto</div>
         <div class="result-label">Booking confirmed<br>no back-and-forth</div>
       </div>
       <div class="result-card">
-        <div class="result-icon">ð°</div>
+        <div class="result-icon">💰</div>
         <div class="result-num" style="color:#7b61ff;">$299+</div>
         <div class="result-label">Potential monthly value<br>recovered from zero</div>
       </div>
       <div class="result-card">
-        <div class="result-icon">ð</div>
+        <div class="result-icon">🔁</div>
         <div class="result-num" style="color:#00b4ff;">24/7</div>
         <div class="result-label">System runs every day<br>no days off</div>
       </div>
@@ -611,25 +611,25 @@
     <h2>Built for businesses that<br><span class="grad">can't afford to miss a lead.</span></h2>
     <div class="who-grid">
       <div class="who-card">
-        <div class="who-icon">ðï¸</div>
+        <div class="who-icon">🏋️</div>
         <h3>Gyms &amp; Fitness Studios</h3>
         <p>New member inquiries come in at all hours. IntrospecAgentic.AI responds instantly so you never lose a signup to a competitor.</p>
       </div>
       <div class="who-card">
-        <div class="who-icon">ðª</div>
+        <div class="who-icon">💪</div>
         <h3>Personal Trainers</h3>
         <p>You're coaching clients when leads come in. Your AI handles the first conversation and books the consultation automatically.</p>
       </div>
       <div class="who-card">
-        <div class="who-icon">â¨</div>
+        <div class="who-icon">✨</div>
         <h3>Med Spas &amp; Wellness</h3>
-        <p>High-value clients expect fast, professional responses. IntrospecAgentic.AI delivers â 24/7, on brand, every time.</p>
+        <p>High-value clients expect fast, professional responses. IntrospecAgentic.AI delivers — 24/7, on brand, every time.</p>
       </div>
     </div>
   </div>
 </section>
 <style>
-  /* ââ Founder Section Styles âââââââââââââââââââââââââââââââ */
+  /* ── Founder Section Styles ─────────────────────────────── */
   .founder-section {
     position: relative;
     z-index: 1;
@@ -744,7 +744,7 @@
     letter-spacing: 0.01em;
   }
 
-  /* ââ Mobile: single column âââââââââââââââââââââââââââââââ */
+  /* ── Mobile: single column ─────────────────────────────── */
   @media (max-width: 720px) {
     .founder-section {
       padding: 72px 20px;
@@ -775,7 +775,7 @@
   }
 </style>
 
-<!-- ââ Section HTML âââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ── Section HTML ───────────────────────────────────────── -->
 <section class="founder-section" id="founder">
   <div class="founder-container">
     <div class="founder-header">
@@ -925,9 +925,9 @@
   <div class="container">
     <div class="eyebrow">Get Started</div>
     <h2>Ready to put your leads<br><span class="grad">on autopilot?</span></h2>
-    <p>Let's do a live walkthrough of the system â built specifically for your business. Free 30-minute call, no commitment.</p>
-    <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" class="btn-primary" style="font-size:17px;padding:20px 48px;">ð &nbsp;Book Your Free Demo</a>
-    <a href="/introspect_demo.html" target="_blank" class="btn-primary" style="font-size:17px;padding:20px 48px;background:transparent;border:2px solid #7b61ff;margin-top:16px;">â¶ &nbsp;See It in Action</a>
+    <p>Let's do a live walkthrough of the system — built specifically for your business. Free 30-minute call, no commitment.</p>
+    <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" class="btn-primary" style="font-size:17px;padding:20px 48px;">📅 &nbsp;Book Your Free Demo</a>
+    <a href="/introspect_demo.html" target="_blank" class="btn-primary" style="font-size:17px;padding:20px 48px;background:transparent;border:2px solid #7b61ff;margin-top:16px;">▶ &nbsp;See It in Action</a>
     <div class="cta-note">No commitment Â· No tech knowledge required Â· Setup in days, not weeks</div>
   </div>
 </section>
@@ -959,7 +959,7 @@
 </footer>
 
 <script>
-  // Email capture â hide form, show thank-you, submit to Netlify  (function(){
+  // Email capture — hide form, show thank-you, submit to Netlify  (function(){
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -985,7 +985,7 @@
     observer.observe(el);
   });
 
-  // ââ Demo advance: step through SMS bubbles one at a time ââ
+  // ── Demo advance: step through SMS bubbles one at a time ──
   (function () {
     var bubbles = document.querySelectorAll('.sms-body .bubble');
     var btn = document.getElementById('demoNext');
@@ -1014,7 +1014,7 @@
 
   <!-- Site Footer -->
   <footer style="background-color:#07090f;border-top:1px solid rgba(255,255,255,0.08);padding:20px 40px;text-align:center;color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:0.02em;">
-    <span>Â© 2026 IntrospecAgentic.AI â All rights reserved</span>
+    <span>Â© 2026 IntrospecAgentic.AI — All rights reserved</span>
     <span style="margin:0 10px;opacity:0.5;">|</span>
     <a href="/terms-of-service" style="color:rgba(255,255,255,0.4);text-decoration:none;" onmouseover="this.style.color='rgba(255,255,255,0.75)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Terms of Service</a>
     <span style="margin:0 10px;opacity:0.5;">|</span>
