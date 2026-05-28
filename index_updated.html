@@ -1,0 +1,1486 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IntrospecAgentic.AI — Never Lose Another Lead</title>
+<style>
+  :root {
+    --blue: #00b4ff;
+    --purple: #7b61ff;
+    --pink: #ff61ab;
+    --green: #00e676;
+    --bg: #07090f;
+    --surface: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+    --text: #fff;
+    --muted: rgba(255,255,255,0.45);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { overflow-x: hidden; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── Background ── */
+  .bg-layer {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, #0d1f3c 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, #0a1528 0%, transparent 55%),
+      var(--bg);
+  }
+  .bg-grid {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(0,180,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,180,255,0.035) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* ── Utility ── */
+  .grad { background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 60%, var(--pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-bg { background: linear-gradient(135deg, var(--blue), var(--purple)); }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  .section { padding: 100px 0; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+  .divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--blue), var(--purple)); border-radius: 2px; margin: 20px auto; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px; backdrop-filter: blur(10px); }
+  .tag { display: inline-block; background: rgba(0,180,255,0.1); border: 1px solid rgba(0,180,255,0.25); border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--blue); letter-spacing: 0.05em; }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(7,9,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo { font-size: 16px; font-weight: 800; letter-spacing: 0.04em; }
+  nav .logo { line-height: 0; }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: #fff; font-size: 14px; font-weight: 700;
+    padding: 10px 22px; border-radius: 50px; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,180,255,0.25);
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(0,180,255,0.35); }
+
+  /* ── Hero ── */
+  .hero-logo {
+    width: 300px;
+    max-width: 60vw;
+    height: auto;
+    display: block;
+    margin: 0 auto -60px;
+    filter: drop-shadow(0 0 40px rgba(123,97,255,0.25));
+  }
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 40px 24px 80px;
+    position: relative; z-index: 1;
+  }
+  .hero-tagline {
+    color: rgb(184, 150, 60);
+    font-size: 15px;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    margin: 32px auto 32px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,230,118,0.08);
+    border: 1px solid rgba(0,230,118,0.2);
+    border-radius: 50px; padding: 6px 16px;
+    font-size: 12px; font-weight: 600; color: var(--green);
+    margin-bottom: 32px;
+  }
+  .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse-green 1.5s ease-in-out infinite; }
+  @keyframes pulse-green { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+  h1 {
+    font-size: clamp(40px, 7vw, 76px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    max-width: 800px;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: #fff; font-size: 16px; font-weight: 700;
+    padding: 18px 40px; border-radius: 50px; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 32px rgba(0,180,255,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,180,255,0.4); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: #fff; font-size: 15px; font-weight: 600;
+    padding: 17px 32px; border-radius: 50px;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(0,180,255,0.4); background: rgba(0,180,255,0.06); }
+
+  .hero-stats {
+    display: flex; gap: 48px; align-items: center;
+    margin-top: 72px; flex-wrap: wrap; justify-content: center;
+  }
+  .hero-stat-num { font-size: 36px; font-weight: 900; letter-spacing: -0.02em; }
+  .hero-stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* ── Problem ── */
+  #problem { background: linear-gradient(180deg, transparent, rgba(255,77,109,0.04) 50%, transparent); }
+  #problem h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; text-align: center; margin-bottom: 12px; }
+  #problem .sub { font-size: clamp(15px, 2vw, 18px); color: var(--muted); text-align: center; max-width: 560px; margin: 0 auto 56px; line-height: 1.7; }
+  .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .problem-card {
+    background: rgba(255,77,109,0.05);
+    border: 1px solid rgba(255,77,109,0.15);
+    border-radius: 18px; padding: 28px 24px; text-align: center;
+  }
+  .problem-num { font-size: 44px; font-weight: 900; letter-spacing: -0.03em; color: #ff4d6d; margin-bottom: 8px; }
+  .problem-label { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+  /* ── How It Works ── */
+  #how { text-align: center; }
+  #how h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 12px; }
+  #how .sub { font-size: clamp(15px, 2vw, 18px); color: var(--muted); max-width: 520px; margin: 0 auto 64px; line-height: 1.7; }
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+  .steps::before {
+    content: '';
+    position: absolute; top: 52px; left: calc(10% + 32px); right: calc(10% + 32px);
+    height: 1px;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    opacity: 0.3;
+  }
+  .step { padding: 0 24px; }
+  .step-num {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 900; margin: 0 auto 24px;
+    position: relative; z-index: 1;
+    box-shadow: 0 0 30px rgba(0,180,255,0.3);
+  }
+  .step h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .step p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ── Live Preview ── */
+  #preview { background: rgba(0,180,255,0.02); }
+  .preview-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .preview-text h2 { font-size: clamp(26px, 3.5vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .preview-text p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+  .feature-list { display: flex; flex-direction: column; gap: 14px; }
+  .feature-item { display: flex; align-items: flex-start; gap: 14px; }
+  .feature-check {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0; margin-top: 2px;
+  }
+  .feature-text { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+  /* [SMS demo styles removed — replaced by 6-step DFY demo] */
+  .sms-card {
+    background: #111827;
+    border: 2px solid rgba(255,255,255,0.08);
+    border-radius: 28px;
+    padding: 20px 14px;
+    max-width: 320px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    margin: 0 auto;
+  }
+  .sms-notch { width: 80px; height: 20px; background: var(--bg); border-radius: 10px; margin: 0 auto 14px; }
+  .sms-screen { background: #000; border-radius: 20px; overflow: hidden; }
+  .sms-hdr { background: #1c1c1e; padding: 12px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .sms-avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+  .sms-name { font-size: 13px; font-weight: 600; }
+  .sms-sub { font-size: 10px; color: var(--muted); }
+  .sms-body { padding: 14px 10px; display: flex; flex-direction: column; gap: 8px; }
+  .bubble { max-width: 82%; padding: 9px 13px; border-radius: 16px; font-size: 12px; line-height: 1.45; }
+  .inbound { background: #2c2c2e; border-bottom-left-radius: 3px; align-self: flex-start; }
+  .outbound { background: linear-gradient(135deg, #0a84ff, #5e5ce6); border-bottom-right-radius: 3px; align-self: flex-end; text-align: right; }
+  .btime { font-size: 9px; color: var(--muted); margin-top: 3px; }
+
+  /* ── Results ── */
+  #results { text-align: center; }
+  #results h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 56px; }
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .result-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px 20px; text-align: center; }
+  .result-icon { font-size: 32px; margin-bottom: 12px; }
+  .result-num { font-size: 38px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 8px; }
+  .result-label { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Who it's for ── */
+  #who h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; text-align: center; margin-bottom: 48px; }
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .who-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; }
+  .who-icon { font-size: 36px; margin-bottom: 16px; }
+  .who-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .who-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ── CTA ── */
+  #cta {
+    text-align: center;
+    padding: 120px 24px;
+    position: relative; overflow: hidden; z-index: 1;
+  }
+  #cta::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,180,255,0.07) 0%, transparent 70%);
+  }
+  #cta > * { position: relative; z-index: 1; }
+  #cta h2 { font-size: clamp(32px, 5vw, 60px); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
+  #cta p { font-size: clamp(16px, 2vw, 20px); color: var(--muted); max-width: 520px; margin: 0 auto 48px; line-height: 1.7; }
+  .cta-note { font-size: 13px; color: rgba(255,255,255,0.25); margin-top: 20px; }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.2);
+    position: relative; z-index: 1;
+  }
+  footer .logo { font-size: 15px; font-weight: 800; display: block; margin-bottom: 12px; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    #hero { align-items: stretch; text-align: center; }
+    #hero > * { max-width: 100%; box-sizing: border-box; }
+    .problem-grid, .steps, .results-grid, .who-grid { grid-template-columns: 1fr; }
+    .preview-wrap { grid-template-columns: 1fr; }
+    .steps::before { display: none; }
+    .hero-stats { gap: 32px; }
+    .section { padding: 72px 0; }
+    h1 { font-size: clamp(36px, 10vw, 52px); }
+  }
+  @media (max-width: 480px) {
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+    .problem-grid { grid-template-columns: 1fr; }
+  }
+
+.nav-founder-btn {
+  position: fixed;
+  top: 68px;
+  left: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #D4A800;
+  text-decoration: none;
+  border: 1px solid rgba(0, 180, 255, 0.4);
+  border-radius: 999px;
+  padding: 4px 12px;
+  background: rgba(212, 168, 0, 0.06);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.nav-founder-btn:hover {
+  color: #D4A800;
+  border-color: rgba(212, 168, 0, 0.7);
+  background: rgba(212, 168, 0, 0.12);
+}
+.nav-demo-btn {
+  position: fixed;
+  top: 68px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4FC3F7;
+  text-decoration: none;
+  border: 1px solid rgba(79, 195, 247, 0.4);
+  border-radius: 999px;
+  padding: 4px 12px;
+  background: rgba(79, 195, 247, 0.06);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.nav-demo-btn:hover {
+  color: #4FC3F7;
+  border-color: rgba(79, 195, 247, 0.7);
+  background: rgba(79, 195, 247, 0.12);
+}
+.nav-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+  /* ── Demo advance button ── */
+  .demo-btn-wrap { display: flex; justify-content: center; width: 100%; }
+  .demo-next-btn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 20px 0 0;
+    padding: 13px 24px;
+    text-align: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    box-shadow: 0 4px 20px rgba(0,180,255,0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.3s ease;
+  }
+  .demo-next-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,180,255,0.55); }
+  .demo-next-btn:active { transform: scale(0.97); }
+  .demo-next-btn.done { opacity: 0; pointer-events: none; }
+  .sms-body .bubble { transition: opacity 0.35s ease, transform 0.35s ease; }
+  .sms-body .bubble.hidden { display: none; }
+  .sms-body .bubble.demo-in { animation: demoBubble 0.35s ease both; }
+  @keyframes demoBubble {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── FAQ ── */
+  #faq { text-align: center; }
+  #faq h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 48px; }
+  .faq-list { text-align: left; max-width: 720px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    width: 100%; background: none; border: none; color: var(--text);
+    font-family: inherit; font-size: 17px; font-weight: 600;
+    text-align: left; padding: 22px 0; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .faq-q:hover { color: var(--blue); }
+  .faq-icon { flex-shrink: 0; font-size: 22px; color: var(--blue); transition: transform 0.3s; line-height: 1; }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+    color: var(--muted); font-size: 15px; line-height: 1.75; padding-bottom: 0;
+  }
+  .faq-item.open .faq-a { max-height: 400px; padding-bottom: 22px; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+    <div class="logo"><span class="grad">IntrospecAgentic.AI</span></div>
+    <a href="#founder" class="nav-founder-btn">My Purpose</a>
+  </div>
+    <a href="#cta" class="nav-cta">📅 &nbsp;Book a Free Demo</a>
+  </div>
+<a href="#cta" class="nav-demo-btn">See It In Action</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <img src="data:image/webp;base64,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" alt="IntrospecAgentic.AI" class="hero-logo">
+  <p class="hero-tagline">“Your time back, your vision forward”</p>
+  <div class="hero-badge">
+    <div class="pulse"></div>
+    Full-Service AI Lead System · Done For You
+  </div>
+
+  <h1>Your competition sleeps. Your pipeline doesn't.</h1>
+
+  <p class="hero-sub">
+    Introspec Agentic builds and manages a complete AI lead-response system for your med spa — done for you, start to finish. Every inquiry captured, every prospect followed up, every lead qualified. You focus on patients. The system handles everything else.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#cta" class="btn-primary">📅 &nbsp;Book a Free 30-Min Demo</a>
+    <a href="#how" class="btn-ghost">See How It Works →</a>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num grad">47s</div>
+      <div class="hero-stat-label">avg. response time</div>
+    </div>
+    <div style="width:1px;height:48px;background:rgba(255,255,255,0.08);"></div>
+    <div>
+      <div class="hero-stat-num" style="color:#00e676;">24/7</div>
+      <div class="hero-stat-label">always on, never misses</div>
+    </div>
+    <div style="width:1px;height:48px;background:rgba(255,255,255,0.08);"></div>
+    <div>
+      <div class="hero-stat-num" style="color:#7b61ff;">DFY</div>
+      <div class="hero-stat-label">Zero Staff Required</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="section">
+  <div class="container">
+    <div class="eyebrow" style="text-align:center;">The Problem</div>
+    <h2>Your leads aren't<br><span style="color:#ff4d6d;">waiting around.</span></h2>
+    <p class="sub">Most med spas respond hours too late — or never. That lead you worked hard to get? Gone to a competitor by morning.</p>
+    <div class="problem-grid">
+      <div class="problem-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="problem-num">78%</div>
+        <div class="problem-label">of sales go to the business<br>that responds first</div>
+      </div>
+      <div class="problem-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="problem-num">5 hrs</div>
+        <div class="problem-label">average response time<br>for most small businesses</div>
+      </div>
+      <div class="problem-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="problem-num">40%</div>
+        <div class="problem-label">of leads are lost to<br>slow follow-up</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="section">
+  <div class="container">
+    <div class="eyebrow">How It Works</div>
+    <h2>The full system loop —<br><span class="grad">running 24/7 for you.</span></h2>
+    <p class="sub">From the first inquiry to the booked appointment, Introspec Agentic handles every step. You do nothing after onboarding.</p>
+    <div class="steps">
+      <div class="step" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="step-num">1</div>
+        <h3>Lead Captured</h3>
+        <p>Inquiry arrives via website or Google Business. Logged instantly.</p>
+      </div>
+      <div class="step" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="step-num">2</div>
+        <h3>AI Responds in 60 Seconds</h3>
+        <p>Personalized reply using your business info: services, pricing, FAQs, brand voice. No staff needed.</p>
+      </div>
+      <div class="step" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="step-num">3</div>
+        <h3>Conversation Continues</h3>
+        <p>If they reply with questions, AI handles them. If they go quiet, automated follow-ups at 24 and 48 hours.</p>
+      </div>
+      <div class="step" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="step-num">4</div>
+        <h3>Owner Stays Informed</h3>
+        <p>High-value leads trigger an instant SMS alert. You never miss a big inquiry.</p>
+      </div>
+      <div class="step" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="step-num">5</div>
+        <h3>Prospect Books</h3>
+        <p>Every response ends with your booking link. System works until they book or opt out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS DEMO CTA -->
+<div style="text-align:center; margin: 56px auto 0; padding: 0 24px;">
+  <a href="https://calendly.com/david-introspecagentic/30min" class="btn-primary">Book a Free 30-Min Demo →</a>
+</div>
+
+<!-- WHAT'S INCLUDED -->
+<section id="included" class="section" style="background: rgba(0,180,255,0.02);">
+  <div class="container">
+    <div class="eyebrow" style="text-align:center;">What You Get</div>
+    <h2 style="font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;text-align:center;margin-bottom:12px;">Everything. <span class="grad">Done For You.</span></h2>
+    <p style="font-size:clamp(15px,2vw,18px);color:var(--muted);text-align:center;max-width:560px;margin:0 auto 56px;line-height:1.7;">You fill out an intake form. We build, configure, and manage the rest.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;" class="included-grid">
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">🌐</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>Multi-Channel Lead Capture</strong> — Inquiries from your website form and Google Business are captured and logged automatically.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">⚡</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>60-Second AI Response, 24/7</strong> — Every new inquiry gets a personalized reply within 60 seconds, around the clock, with no staff required.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">🧠</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>RAG Knowledge Base</strong> — The AI is trained on your business: services, pricing, FAQs, staff, hours, booking link, and brand voice.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">💬</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>Conversation Continuity</strong> — The AI doesn't fire one reply and stop. It continues the dialogue, answering follow-up questions naturally.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">🎯</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>Lead Qualification &amp; Routing</strong> — High-value leads are identified and flagged so the right prospects get prioritized attention.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">🔁</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>Automated Follow-Up Sequences</strong> — If a prospect goes quiet, follow-up messages go out automatically at 24 and 48 hours. No lead falls through.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">📲</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>Owner SMS Alerts</strong> — You get an instant text the moment a high-value lead arrives or a prospect books. Stay in the loop without being in the system.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">📅</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>Booking Integration</strong> — Your Calendly or booking platform link is embedded in every AI response, making it frictionless to book.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">📊</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>Monthly Performance Report</strong> — Each month you receive a report showing leads captured, responses sent, and bookings attributed to the system.</p>
+      </div>
+      <div class="card" style="opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;">
+        <div style="font-size:22px;margin-bottom:12px;">🛠️</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.9);line-height:1.6;"><strong>Ongoing Management</strong> — David manages the system. You do nothing after onboarding. Updates, monitoring, and optimization are handled for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  @media (max-width: 768px) { .included-grid { grid-template-columns: 1fr !important; } }
+</style>
+
+<!-- LIVE PREVIEW -->
+<section id="preview" class="section">
+  <div class="container">
+
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="eyebrow">See It In Action</div>
+      <h2 style="font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px;">See the Full System in Action</h2>
+      <p style="color:var(--muted);font-size:clamp(15px,2vw,18px);max-width:560px;margin:0 auto;line-height:1.7;">From first inquiry to booked appointment — completely automated.</p>
+    </div>
+
+    <!-- Step counter -->
+    <div style="text-align:center;margin-bottom:10px;">
+      <span id="demoStepLabel" style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Step 1 of 6</span>
+    </div>
+    <!-- Progress bar -->
+    <div style="max-width:440px;margin:0 auto 28px;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;">
+      <div id="demoProgressBar" style="height:100%;width:16.67%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px;transition:width 0.35s ease;"></div>
+    </div>
+
+    <!-- Steps wrapper -->
+    <div style="max-width:560px;margin:0 auto;position:relative;">
+
+      <!-- STEP 1: Inquiry Arrives -->
+      <div class="demoStep" id="demoStep1">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">⏱ 11:47 PM — Inquiry Arrives</div>
+        <div style="background:#111827;border:1px solid rgba(255,255,255,0.09);border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.07);">
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(0,180,255,0.12);border:1px solid rgba(0,180,255,0.2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🌐</div>
+            <div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:2px;">New Inquiry</div>
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.9);">Website Form — Everlasting Beauty Med Spa</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px;">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;">Lead</div>
+              <div style="font-size:14px;color:#fff;font-weight:700;">Ashley M.</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px;">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;">Received</div>
+              <div style="font-size:14px;color:#fff;font-weight:700;">11:47 PM</div>
+            </div>
+          </div>
+          <div style="background:rgba(0,180,255,0.05);border:1px solid rgba(0,180,255,0.12);border-radius:12px;padding:14px;">
+            <div style="font-size:10px;color:var(--blue);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;">Message</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.65;">"Hi, I’m interested in getting lip filler. Do you offer Juvederm? How much does it usually cost and how soon can I get an appointment?"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: AI Responds in 47 Seconds -->
+      <div class="demoStep" id="demoStep2" style="display:none;">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">⚡ 11:47 PM — AI Responds in 47 Seconds</div>
+        <div style="background:#111827;border:1px solid rgba(255,255,255,0.09);border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.07);">
+            <div style="width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,rgba(0,180,255,0.2),rgba(123,97,255,0.2));border:1px solid rgba(0,180,255,0.25);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">📧</div>
+            <div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:2px;">AI-Generated Email Response</div>
+              <div style="font-size:12px;color:var(--muted);">Response time: <strong style="color:var(--blue);">47 seconds</strong></div>
+            </div>
+          </div>
+          <div style="margin-bottom:10px;">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:3px;">To:</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.85);">Ashley M.</div>
+          </div>
+          <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.07);">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:3px;">Subject:</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.85);font-weight:600;">Re: Lip Filler Inquiry</div>
+          </div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.75;margin-bottom:16px;">
+            Hi Ashley — great question! Yes, we use Juvederm exclusively for lip filler. Our lip treatments start at $550 and include a complimentary consultation. We have availability this week — you can book directly here:<br><br>
+            <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="display:inline-block;padding:8px 16px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;text-decoration:none;border-radius:8px;font-size:12px;font-weight:700;">Book Now →</a><br><br>
+            Let me know if you have any other questions. We’d love to see you!<br><br>
+            — Everlasting Beauty Med Spa
+          </div>
+          <div style="background:rgba(0,180,255,0.06);border:1px solid rgba(0,180,255,0.15);border-radius:8px;padding:9px 13px;">
+            <div style="font-size:11px;color:var(--muted);">🧠 Trained on: <span style="color:rgba(255,255,255,0.6);">services, pricing, FAQs, brand voice</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Owner Notified -->
+      <div class="demoStep" id="demoStep3" style="display:none;">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">📲 11:47 PM — Owner Notified</div>
+        <div style="background:#111827;border:1px solid rgba(255,255,255,0.09);border-radius:20px;padding:20px 14px;box-shadow:0 24px 60px rgba(0,0,0,0.4);max-width:300px;margin:0 auto;">
+          <div style="width:60px;height:14px;background:rgba(255,255,255,0.06);border-radius:7px;margin:0 auto 12px;"></div>
+          <div style="background:#000;border-radius:16px;overflow:hidden;">
+            <div style="background:#1c1c1e;padding:10px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.06);">
+              <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#D4A800,#8B6914);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#000;flex-shrink:0;">EB</div>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:#fff;">Business Owner</div>
+                <div style="font-size:10px;color:var(--muted);">+1 (305) 555-0198</div>
+              </div>
+            </div>
+            <div style="padding:14px 10px;">
+              <div style="max-width:88%;background:linear-gradient(135deg,#D4A800,#A67C00);border-radius:14px;border-bottom-left-radius:3px;padding:10px 13px;font-size:12px;color:#000;line-height:1.5;font-weight:500;">
+                🔔 New high-value lead — Ashley M. asked about lip filler. AI responded in 47s. Check dashboard.
+                <div style="font-size:9px;color:rgba(0,0,0,0.5);margin-top:4px;">11:47 PM · Automated</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Ashley Replies Next Morning -->
+      <div class="demoStep" id="demoStep4" style="display:none;">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">💬 Ashley Replies the Next Morning — 9:03 AM</div>
+        <div style="background:#111827;border:1px solid rgba(255,255,255,0.09);border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+          <!-- Ashley’s message -->
+          <div style="margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <div style="width:24px;height:24px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;">A</div>
+              <span style="font-size:11px;color:var(--muted);">Ashley M. · 9:03 AM</span>
+            </div>
+            <div style="background:#2c2c2e;border-radius:14px;border-top-left-radius:3px;padding:10px 14px;font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;display:inline-block;max-width:90%;">
+              "Thanks! One more question — do you require a deposit to hold the appointment?"
+            </div>
+          </div>
+          <!-- AI instant reply -->
+          <div style="text-align:right;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;justify-content:flex-end;">
+              <span style="font-size:11px;color:var(--blue);">AI · Instant Response ⚡</span>
+              <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;">AI</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#0a84ff,#5e5ce6);border-radius:14px;border-top-right-radius:3px;padding:10px 14px;font-size:13px;color:#fff;line-height:1.6;display:inline-block;max-width:90%;text-align:left;">
+              Hi Ashley — no deposit required to book! Just click the link and pick a time that works for you. Looking forward to seeing you! <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="color:#7ecfff;">Book Now →</a>
+              <div style="font-size:9px;color:rgba(255,255,255,0.5);margin-top:4px;">9:03 AM · Automatic ⚡</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: Automated Follow-Up -->
+      <div class="demoStep" id="demoStep5" style="display:none;">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">🔁 Ashley Doesn’t Book — 24 Hours Later, Follow-Up Goes Out Automatically</div>
+        <div style="background:#111827;border:1px solid rgba(255,255,255,0.09);border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.07);">
+            <div style="width:34px;height:34px;border-radius:8px;background:rgba(123,97,255,0.12);border:1px solid rgba(123,97,255,0.2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🔁</div>
+            <div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:2px;">Automated Follow-Up Email</div>
+              <div style="font-size:12px;color:var(--muted);">Sent 24h after no response · Staff involved: 0</div>
+            </div>
+          </div>
+          <div style="margin-bottom:10px;">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:3px;">To:</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.85);">Ashley M.</div>
+          </div>
+          <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.07);">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:3px;">Subject:</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.85);font-weight:600;">Still thinking about it?</div>
+          </div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.75;margin-bottom:14px;">
+            Hi Ashley — just wanted to follow up in case life got busy. Your lip filler appointment is just one click away — slots tend to fill quickly.<br><br>
+            <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="display:inline-block;padding:8px 16px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;text-decoration:none;border-radius:8px;font-size:12px;font-weight:700;">Book Your Appointment →</a><br><br>
+            — Everlasting Beauty Med Spa
+          </div>
+          <div style="background:rgba(123,97,255,0.07);border:1px solid rgba(123,97,255,0.15);border-radius:8px;padding:9px 13px;">
+            <div style="font-size:11px;color:var(--muted);">🔁 Automated follow-up — sent 24h after no response · Staff involved: 0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6: Ashley Books -->
+      <div class="demoStep" id="demoStep6" style="display:none;">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">🎉 Ashley Books ✓</div>
+        <div style="background:#111827;border:1px solid rgba(0,230,118,0.18);border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,0.4);">
+          <!-- Confirmation card -->
+          <div style="background:rgba(0,230,118,0.07);border:1px solid rgba(0,230,118,0.18);border-radius:14px;padding:20px;margin-bottom:18px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:10px;">🎉</div>
+            <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;">Ashley M. booked a Lip Filler appointment</div>
+            <div style="font-size:14px;color:var(--green);font-weight:600;">Thursday, June 5 · 2:00 PM</div>
+          </div>
+          <!-- Stats -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px;text-align:center;">
+              <div style="font-size:18px;font-weight:900;color:var(--blue);">47s</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:3px;">Response time</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px;text-align:center;">
+              <div style="font-size:18px;font-weight:900;color:var(--purple);">Auto</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:3px;">Follow-up</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px;text-align:center;">
+              <div style="font-size:18px;font-weight:900;color:var(--green);">0</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:3px;">Staff needed</div>
+            </div>
+          </div>
+          <!-- Owner SMS -->
+          <div style="background:#000;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);">
+            <div style="background:#1c1c1e;padding:8px 12px;font-size:10px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.05);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;">📲 Owner SMS · Automated</div>
+            <div style="padding:12px 10px;">
+              <div style="max-width:85%;background:linear-gradient(135deg,#D4A800,#A67C00);border-radius:12px;border-bottom-left-radius:3px;padding:9px 12px;font-size:12px;color:#000;font-weight:500;line-height:1.5;">
+                ✅ Ashley M. just booked! June 5 @ 2pm. No staff needed.
+                <div style="font-size:9px;color:rgba(0,0,0,0.5);margin-top:3px;">Automated</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end steps wrapper -->
+
+    <!-- Navigation buttons -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-top:28px;">
+      <button id="demoPrevBtn" disabled style="padding:12px 24px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:14px;font-weight:600;cursor:not-allowed;opacity:0.35;transition:background 0.2s,opacity 0.2s;">← Previous</button>
+      <button id="demoNextBtn" style="padding:12px 28px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,180,255,0.35);transition:transform 0.15s,box-shadow 0.15s;">Next →</button>
+    </div>
+
+    <!-- Progress dots -->
+    <div style="display:flex;justify-content:center;gap:7px;margin-top:18px;">
+      <div class="demo-dot active" data-dot="1" style="width:7px;height:7px;border-radius:50%;background:var(--blue);transition:background 0.3s,transform 0.3s;transform:scale(1.4);"></div>
+      <div class="demo-dot" data-dot="2" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+      <div class="demo-dot" data-dot="3" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+      <div class="demo-dot" data-dot="4" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+      <div class="demo-dot" data-dot="5" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+      <div class="demo-dot" data-dot="6" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+    </div>
+
+  </div>
+</section>
+<style>
+  .demoStep { animation: demoStepIn 0.3s ease both; }
+  @keyframes demoStepIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  #demoPrevBtn:hover:not(:disabled) { background: rgba(255,255,255,0.1) !important; }
+  #demoNextBtn:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(0,180,255,0.5) !important; }
+  #demoNextBtn:active { transform: scale(0.97); }
+</style>
+
+<!-- RESULTS -->
+<section id="results" class="section">
+  <div class="container">
+    <div class="eyebrow">Results</div>
+    <h2>One lead. <span class="grad">Zero effort.</span></h2>
+    <div class="results-grid">
+      <div class="result-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="result-icon">⚡</div>
+        <div class="result-num grad">47s</div>
+        <div class="result-label">Response time<br>while you slept</div>
+      </div>
+      <div class="result-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="result-icon">📅</div>
+        <div class="result-num" style="color:#00e676;">Auto</div>
+        <div class="result-label">Booking confirmed<br>no back-and-forth</div>
+      </div>
+      <div class="result-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="result-icon">🔁</div>
+        <div class="result-num" style="color:#7b61ff;">0</div>
+        <div class="result-label">Every Lead Followed Up — 24h and 48h automated follow-ups mean no lead ever falls through the cracks</div>
+      </div>
+      <div class="result-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="result-icon">🔁</div>
+        <div class="result-num" style="color:#00b4ff;">24/7</div>
+        <div class="result-label">System runs every day<br>no days off</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDING CLIENTS -->
+<section id="founding" style="padding:80px 24px;background:linear-gradient(135deg,rgba(0,180,255,0.07) 0%,rgba(123,97,255,0.09) 100%);border-top:1px solid rgba(0,180,255,0.1);border-bottom:1px solid rgba(123,97,255,0.1);text-align:center;position:relative;z-index:1;">
+  <div class="container">
+    <div class="tag" style="margin-bottom:20px;">Limited Availability</div>
+    <h2 style="font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin-bottom:20px;">Currently Accepting <span class="grad">Founding Clients</span></h2>
+    <p style="font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:600px;margin:0 auto 36px;line-height:1.75;">We're building the first wave of Introspec Agentic deployments with a select group of med spas. Founding clients receive a preferred rate in exchange for a testimonial and case study after 60 days. A limited number of spots are available.</p>
+    <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" class="btn-primary" style="font-size:16px;padding:18px 44px;">📅 &nbsp;Check Availability</a>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section id="who" class="section">
+  <div class="container">
+    <div class="eyebrow" style="text-align:center;">Who It's For</div>
+    <h2>Built for businesses that<br><span class="grad">can't afford to miss a lead.</span></h2>
+    <div class="who-grid">
+      <div class="who-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="who-icon">✨</div>
+        <h3>Med Spa Owners</h3>
+        <p>You're with patients all day. Introspec Agentic handles every inquiry, follows up automatically, and alerts you when something important comes in. You check in when you want to — the system runs when you can't.</p>
+      </div>
+      <div class="who-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="who-icon">💉</div>
+        <h3>Injectors &amp; Aesthetic NPs</h3>
+        <p>You're booked back-to-back when new clients reach out. Introspec Agentic handles every inquiry, follows up if they go quiet, and sends your booking link — without anyone on staff lifting a finger.</p>
+      </div>
+      <div class="who-card" style="opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s;">
+        <div class="who-icon">🏥</div>
+        <h3>Multi-Service Practices</h3>
+        <p>Botox, fillers, lasers, memberships — high-value clients expect fast, professional responses. Introspec Agentic delivers 24/7, on brand, with automated follow-up built in. Every lead gets worked, every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  /* ── Founder Section Styles ─────────────────────────────── */
+  .founder-section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 24px;
+    background: #0c0c0c;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: inherit;
+  }
+
+  .founder-container {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  /* Section badge + heading */
+  .founder-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .founder-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 5px 14px;
+    margin-bottom: 20px;
+  }
+
+  .founder-heading {
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  /* Two-column layout */
+  .founder-layout {
+    display: flex;
+    gap: 72px;
+    align-items: flex-start;
+  }
+
+  /* Left column: circular photo */
+  .founder-photo-col {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .founder-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+  }
+
+  .founder-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  /* Right column: text */
+  .founder-text-col {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .founder-body p {
+    font-size: 17px;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.68);
+    margin: 0 0 22px;
+  }
+
+  .founder-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Attribution */
+  .founder-attribution {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .founder-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.92);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .founder-title {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.38);
+    margin: 5px 0 0;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Mobile: single column ─────────────────────────────── */
+  @media (max-width: 720px) {
+    .founder-section {
+      padding: 72px 20px;
+    }
+
+    .founder-layout {
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .founder-photo-col {
+      width: 100%;
+    }
+
+    .founder-circle {
+      width: 160px;
+      height: 160px;
+    }
+
+    .founder-initials {
+      font-size: 42px;
+    }
+
+    .founder-header {
+      margin-bottom: 48px;
+    }
+  }
+</style>
+
+<!-- ── Section HTML ───────────────────────────────────────── -->
+<section class="founder-section" id="founder">
+  <div class="founder-container">
+    <div class="founder-header">
+      <div class="founder-badge">Founder</div>
+      <h2 class="founder-heading">Why I Built This</h2>
+    </div>
+    <div class="founder-layout">
+      <div class="founder-photo-col">
+        <div class="founder-circle">
+          <img src="images/david_ramsingh_headshot.jpg" alt="David Ramsingh, Founder">
+        </div>
+      </div>
+      <div class="founder-text-col">
+        <div class="founder-body">
+          <p>I’ve always been drawn to the fitness and wellness space — the people in it, what it does for people’s lives.</p>
+
+          <p>When I started looking at how these businesses actually operate, I kept seeing the same gap. Great services. Real demand. Leads slipping away because nobody could respond fast enough.</p>
+
+          <p>A potential client reaches out after hours, or between sessions, or while the owner is with a patient. By the time someone follows up — hours later, sometimes the next day — they’ve already booked somewhere else.</p>
+
+          <p>I built Introspec Agentic to close that gap. A fully managed AI system that captures every inquiry, responds in under 60 seconds, follows up automatically, and keeps the owner informed — so the spa never loses a lead to slow follow-up again. Done for you. Running 24/7. No staff required.</p>
+
+          <p>Starting with med spas. Expanding into gyms and personal trainers. Same mission across all of it.</p>
+        </div>
+        <div class="founder-attribution">
+          <p class="founder-name">— David Ramsingh</p>
+          <p class="founder-title">Founder, Introspec Agentic</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="eyebrow" style="text-align:center;">Common Questions</div>
+    <h2>Everything you<br><span class="grad">need to know</span></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How does it actually work?<span class="faq-icon">+</span></button>
+        <div class="faq-a">When a new inquiry comes in, the system responds within 60 seconds using your business-specific knowledge base — your services, pricing, FAQs, and brand voice. If the prospect replies, the conversation continues. If they go quiet, automated follow-ups go out at 24 and 48 hours. You receive SMS alerts for high-value leads. At the end of each month, you get a performance report.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Will it sound like a bot?<span class="faq-icon">+</span></button>
+        <div class="faq-a">No. The responses are written to sound like you — conversational, professional, on-brand. Most clients can't tell the difference from a staff reply. You review and approve the message templates before anything goes live.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Does this replace my front desk or staff?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Not exactly — it handles every incoming inquiry and follow-up automatically, so your team can focus on patients who are already in the door. Think of it as the first line of response that never sleeps, never gets busy, and never forgets to follow up.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What happens if a lead asks something complicated?<span class="faq-icon">+</span></button>
+        <div class="faq-a">The system handles common questions (pricing, availability, services). If something falls outside its scope, it lets the lead know someone will follow up and notifies you immediately so nothing slips.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What does it cost?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Pricing is based on your business size and volume. Book a free 30-minute call and I'll put together something specific to your situation — no generic packages.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long does setup take?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Typically 3–4 weeks from signed agreement to go-live. You fill out one intake form and join one 30-minute approval call. Introspec Agentic handles the rest — building the knowledge base, configuring the automations, testing everything, and activating the system.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What platforms does it work on?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Currently optimized for website forms and SMS. Instagram DM integration is available depending on your setup. If you're not sure whether it fits your current flow, we'll figure that out on the call.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is there a long-term contract?<span class="faq-icon">+</span></button>
+        <div class="faq-a">No long-term commitment required. Month-to-month.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ══════════════════════════════════════════════════════════
+     WATCH IT WORK — 6-Step Ashley M. Bottom Demo
+     Uses wiwStep*, wiwNextBtn, wiwPrevBtn, wiwProgressBar, wiwStepLabel
+     Completely separate from the mid-page demoStep* demo
+     ══════════════════════════════════════════════════════════ -->
+<section id="watch-it-work" style="padding:100px 24px;background:linear-gradient(180deg,#07090f 0%,#090d16 100%);border-top:1px solid rgba(0,180,255,0.1);position:relative;z-index:1;">
+  <div class="container">
+    <div class="eyebrow" style="text-align:center;">The System in Action</div>
+    <h2 style="font-size:clamp(30px,4.5vw,52px);font-weight:900;line-height:1.1;letter-spacing:-0.03em;text-align:center;margin-bottom:12px;">Watch It <span class="grad">Work</span></h2>
+    <p style="text-align:center;color:var(--muted);font-size:17px;max-width:540px;margin:0 auto 48px;line-height:1.75;">From first inquiry to booked appointment — handled automatically, start to finish. Staff involved: 0.</p>
+
+    <!-- Phone-style demo shell -->
+    <div style="max-width:600px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 28px;position:relative;">
+
+      <!-- Step counter + progress bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <span id="wiwStepLabel" style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Step 1 of 6</span>
+        <div style="width:180px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;">
+          <div id="wiwProgressBar" style="height:100%;width:16.67%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px;transition:width 0.35s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div id="wiwStepsWrapper">
+
+        <!-- STEP 1: New inquiry arrives -->
+        <div class="wiwStep" id="wiwStep1">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">📩 New Inquiry — 11:47 PM</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">👤</div>
+              <div>
+                <div style="font-size:14px;color:#fff;font-weight:700;">Ashley M.</div>
+                <div style="font-size:11px;color:var(--muted);">Contact Form · 11:47 PM</div>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:14px;font-size:14px;color:rgba(255,255,255,0.85);line-height:1.6;">
+              "Hi — I'm interested in Botox. Can you tell me about pricing and what areas you treat? I'd love to book something soon."
+            </div>
+          </div>
+          <div style="margin-top:14px;padding:10px 14px;background:rgba(0,180,255,0.07);border:1px solid rgba(0,180,255,0.15);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);">
+            ⏱ Inquiry logged. AI system activating...
+          </div>
+        </div>
+
+        <!-- STEP 2: AI responds in 47 seconds -->
+        <div class="wiwStep" id="wiwStep2" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">⚡ AI Responds — 47 Seconds Later</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🤖</div>
+              <div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.85);">Introspec AI</div>
+                <div style="font-size:11px;color:var(--muted);">11:48 PM · <span style="color:#00e676;">47s response</span></div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;">
+              Hi Ashley — great timing! We offer Botox starting at <strong style="color:#fff;">$12/unit</strong> for forehead lines, crow's feet, and frown lines. Most clients need 20–40 units depending on the area.<br><br>
+              We have openings this week — you can grab a time here:<br>
+              <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="color:#7ecfff;">📅 Book Your Appointment →</a><br><br>
+              Let me know if you have any other questions!
+            </div>
+          </div>
+          <div style="margin-top:14px;padding:10px 14px;background:rgba(0,230,118,0.07);border:1px solid rgba(0,230,118,0.15);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);">
+            🧠 Trained on: <span style="color:rgba(255,255,255,0.5);">services, pricing, FAQs, brand voice</span>
+          </div>
+        </div>
+
+        <!-- STEP 3: Owner gets SMS alert -->
+        <div class="wiwStep" id="wiwStep3" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">📱 Owner SMS Alert — Instant</div>
+          <div style="max-width:320px;margin:0 auto;background:#1a1a2e;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.07);">
+              <div style="font-size:20px;">💬</div>
+              <div style="font-size:13px;font-weight:700;color:#fff;">Messages</div>
+              <div style="margin-left:auto;font-size:11px;color:var(--muted);">now</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">IA</div>
+              <div style="flex:1;">
+                <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Introspec Agentic</div>
+                <div style="background:rgba(255,255,255,0.06);border-radius:12px;padding:12px;font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;">
+                  🔔 New lead: <strong>Ashley M.</strong> — Botox inquiry. AI responded in 47s. Check dashboard.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px;padding:10px 14px;background:rgba(123,97,255,0.07);border:1px solid rgba(123,97,255,0.18);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);text-align:center;">
+            👤 You were asleep. The system handled it.
+          </div>
+        </div>
+
+        <!-- STEP 4: Ashley follows up next morning -->
+        <div class="wiwStep" id="wiwStep4" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">💬 Ashley Follows Up — 9:14 AM</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:12px;">👤</div>
+                <span style="font-size:11px;color:var(--muted);">Ashley M. · 9:14 AM</span>
+              </div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.85);">"One more question — do I need to come in for a consultation first or can I just book?"</div>
+            </div>
+            <div style="background:rgba(0,180,255,0.05);border:1px solid rgba(0,180,255,0.12);border-radius:14px;padding:16px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:12px;">🤖</div>
+                <span style="font-size:11px;color:var(--muted);">Introspec AI · 9:14 AM · <span style="color:#00e676;">instant reply</span></span>
+              </div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.65;">
+                Hi Ashley — no consultation required! You can book directly. Your first appointment includes a quick pre-treatment review with the provider. Click here whenever you're ready: <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="color:#7ecfff;">Book Now →</a>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:12px;padding:10px 14px;background:rgba(0,180,255,0.07);border:1px solid rgba(0,180,255,0.12);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);text-align:center;">
+            🤖 Staff involved so far: 0
+          </div>
+        </div>
+
+        <!-- STEP 5: 24-hour automated follow-up -->
+        <div class="wiwStep" id="wiwStep5" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">🔁 Ashley Hasn't Booked — 24-Hour Follow-Up Goes Out</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🤖</div>
+              <div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.85);">Introspec AI</div>
+                <div style="font-size:11px;color:var(--muted);">Automated · 24h follow-up</div>
+              </div>
+            </div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;">
+              Hi Ashley — just wanted to follow up in case life got busy! Your Botox appointment is one click away, and our schedule tends to fill up quickly.<br><br>
+              <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="color:#7ecfff;">📅 Grab your spot →</a><br><br>
+              We'd love to see you in. 😊
+            </div>
+          </div>
+          <div style="margin-top:14px;padding:10px 14px;background:rgba(123,97,255,0.07);border:1px solid rgba(123,97,255,0.18);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);">
+            🔁 Sent automatically. No one on your team did anything.
+          </div>
+        </div>
+
+        <!-- STEP 6: Ashley books -->
+        <div class="wiwStep" id="wiwStep6" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">🎉 Ashley Books ✓</div>
+          <div style="background:linear-gradient(135deg,rgba(0,230,118,0.08),rgba(0,180,255,0.06));border:1px solid rgba(0,230,118,0.2);border-radius:14px;padding:24px;text-align:center;">
+            <div style="font-size:48px;margin-bottom:14px;">✅</div>
+            <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:6px;">Ashley M. booked a Botox appointment</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:20px;">June 5 · 2:00 PM · Confirmed automatically</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+              <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:12px;">
+                <div style="font-size:20px;font-weight:900;color:#00e676;">47s</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:3px;">First response</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:12px;">
+                <div style="font-size:20px;font-weight:900;color:var(--blue);">3</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:3px;">AI messages sent</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:12px;">
+                <div style="font-size:20px;font-weight:900;color:var(--purple);">0</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:3px;">Staff involved</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:16px;padding:14px 18px;background:rgba(0,230,118,0.07);border:1px solid rgba(0,230,118,0.18);border-radius:10px;font-size:13px;color:rgba(255,255,255,0.75);text-align:center;">
+            ✅ Ashley M. just booked! June 5 @ 2pm — <strong style="color:#00e676;">Staff involved: 0</strong>
+          </div>
+        </div>
+
+      </div><!-- /wiwStepsWrapper -->
+
+      <!-- Navigation buttons -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:24px;">
+        <button id="wiwPrevBtn" disabled style="padding:12px 24px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:14px;font-weight:600;cursor:not-allowed;opacity:0.35;transition:background 0.2s,opacity 0.2s;">← Previous</button>
+        <button id="wiwNextBtn" style="padding:12px 28px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,180,255,0.35);transition:transform 0.15s,box-shadow 0.15s;">Next →</button>
+      </div>
+
+      <!-- Progress dots -->
+      <div style="display:flex;justify-content:center;gap:7px;margin-top:18px;">
+        <div class="wiw-dot active" data-dot="1" style="width:7px;height:7px;border-radius:50%;background:var(--blue);transition:background 0.3s,transform 0.3s;transform:scale(1.4);"></div>
+        <div class="wiw-dot" data-dot="2" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+        <div class="wiw-dot" data-dot="3" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+        <div class="wiw-dot" data-dot="4" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+        <div class="wiw-dot" data-dot="5" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+        <div class="wiw-dot" data-dot="6" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+      </div>
+
+    </div><!-- /demo shell -->
+
+    <!-- CTA under demo -->
+    <div style="text-align:center;margin-top:40px;">
+      <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" class="btn-primary">📅 &nbsp;Get This Working for Your Business →</a>
+    </div>
+
+  </div>
+</section>
+<style>
+  .wiwStep { animation: wiwStepIn 0.3s ease both; }
+  @keyframes wiwStepIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  #wiwPrevBtn:hover:not(:disabled) { background: rgba(255,255,255,0.1) !important; }
+  #wiwNextBtn:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(0,180,255,0.5) !important; }
+  #wiwNextBtn:active { transform: scale(0.97); }
+</style>
+
+<!-- FOOTER -->
+<footer style="padding:48px 24px;background:#07090f;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+  <div class="container">
+    <div style="font-size:20px;font-weight:800;letter-spacing:-0.03em;margin-bottom:10px;"><span class="grad">Introspec</span> Agentic</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">AI-powered lead response &amp; follow-up for med spas.</p>
+    <p style="font-size:12px;color:rgba(255,255,255,0.2);">&copy; 2025 Introspec Agentic. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT
+     1. FAQ accordion  (toggleFaq)
+     2. Mid-page demo  (demoStep* / demoNextBtn / demoPrevBtn)
+     3. Bottom demo    (wiwStep* / wiwNextBtn / wiwPrevBtn)
+     4. Scroll-reveal animations
+     ══════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  // ── 1. FAQ Accordion ─────────────────────────────────────
+  window.toggleFaq = function (btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    // Close all open items
+    document.querySelectorAll('.faq-item.open').forEach(function (el) {
+      el.classList.remove('open');
+    });
+    // Toggle the clicked one
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  };
+
+  // ── 2. Mid-page Demo (demoStep1-6) ───────────────────────
+  var DEMO_TOTAL = 6;
+  var demoCurrent = 1;
+
+  function demoGoTo(n) {
+    if (n < 1 || n > DEMO_TOTAL) return;
+    var prev = document.getElementById('demoStep' + demoCurrent);
+    var next = document.getElementById('demoStep' + n);
+    if (!prev || !next) return;
+    prev.style.display = 'none';
+    next.style.display = '';
+    // Force reflow for animation
+    next.classList.remove('demoStep');
+    void next.offsetWidth;
+    next.classList.add('demoStep');
+    demoCurrent = n;
+
+    // Step label
+    var label = document.getElementById('demoStepLabel');
+    if (label) label.textContent = 'Step ' + n + ' of ' + DEMO_TOTAL;
+
+    // Progress bar
+    var bar = document.getElementById('demoProgressBar');
+    if (bar) bar.style.width = ((n / DEMO_TOTAL) * 100).toFixed(2) + '%';
+
+    // Dots
+    document.querySelectorAll('.demo-dot').forEach(function (dot) {
+      var d = parseInt(dot.getAttribute('data-dot'), 10);
+      if (d === n) {
+        dot.style.background = 'var(--blue)';
+        dot.style.transform = 'scale(1.4)';
+      } else {
+        dot.style.background = 'rgba(255,255,255,0.18)';
+        dot.style.transform = 'scale(1)';
+      }
+    });
+
+    // Buttons
+    var prevBtn = document.getElementById('demoPrevBtn');
+    var nextBtn = document.getElementById('demoNextBtn');
+    if (prevBtn) {
+      prevBtn.disabled = n === 1;
+      prevBtn.style.opacity = n === 1 ? '0.35' : '1';
+      prevBtn.style.cursor = n === 1 ? 'not-allowed' : 'pointer';
+    }
+    if (nextBtn) {
+      if (n === DEMO_TOTAL) {
+        nextBtn.textContent = 'Restart ↺';
+      } else {
+        nextBtn.textContent = 'Next →';
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var nextBtn = document.getElementById('demoNextBtn');
+    var prevBtn = document.getElementById('demoPrevBtn');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        if (demoCurrent === DEMO_TOTAL) {
+          demoGoTo(1);
+        } else {
+          demoGoTo(demoCurrent + 1);
+        }
+      });
+    }
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        demoGoTo(demoCurrent - 1);
+      });
+    }
+  });
+
+  // ── 3. Bottom "Watch It Work" Demo (wiwStep1-6) ──────────
+  var WIW_TOTAL = 6;
+  var wiwCurrent = 1;
+
+  function wiwGoTo(n) {
+    if (n < 1 || n > WIW_TOTAL) return;
+    var prev = document.getElementById('wiwStep' + wiwCurrent);
+    var next = document.getElementById('wiwStep' + n);
+    if (!prev || !next) return;
+    prev.style.display = 'none';
+    next.style.display = '';
+    // Force reflow for animation
+    next.classList.remove('wiwStep');
+    void next.offsetWidth;
+    next.classList.add('wiwStep');
+    wiwCurrent = n;
+
+    // Step label
+    var lbl = document.getElementById('wiwStepLabel');
+    if (lbl) lbl.textContent = 'Step ' + n + ' of ' + WIW_TOTAL;
+
+    // Progress bar
+    var bar = document.getElementById('wiwProgressBar');
+    if (bar) bar.style.width = ((n / WIW_TOTAL) * 100).toFixed(2) + '%';
+
+    // Dots
+    document.querySelectorAll('.wiw-dot').forEach(function (dot) {
+      var d = parseInt(dot.getAttribute('data-dot'), 10);
+      if (d === n) {
+        dot.style.background = 'var(--blue)';
+        dot.style.transform = 'scale(1.4)';
+      } else {
+        dot.style.background = 'rgba(255,255,255,0.18)';
+        dot.style.transform = 'scale(1)';
+      }
+    });
+
+    // Buttons
+    var prevBtn = document.getElementById('wiwPrevBtn');
+    var nextBtn = document.getElementById('wiwNextBtn');
+    if (prevBtn) {
+      prevBtn.disabled = n === 1;
+      prevBtn.style.opacity = n === 1 ? '0.35' : '1';
+      prevBtn.style.cursor = n === 1 ? 'not-allowed' : 'pointer';
+    }
+    if (nextBtn) {
+      nextBtn.textContent = n === WIW_TOTAL ? 'Restart ↺' : 'Next →';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var wiwNext = document.getElementById('wiwNextBtn');
+    var wiwPrev = document.getElementById('wiwPrevBtn');
+    if (wiwNext) {
+      wiwNext.addEventListener('click', function () {
+        if (wiwCurrent === WIW_TOTAL) {
+          wiwGoTo(1);
+        } else {
+          wiwGoTo(wiwCurrent + 1);
+        }
+      });
+    }
+    if (wiwPrev) {
+      wiwPrev.addEventListener('click', function () {
+        wiwGoTo(wiwCurrent - 1);
+      });
+    }
+  });
+
+  // ── 4. Scroll-reveal (existing animation) ────────────────
+  document.addEventListener('DOMContentLoaded', function () {
+    var animated = document.querySelectorAll('[style*="opacity: 0"]');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    animated.forEach(function (el) { observer.observe(el); });
+  });
+
+}());
+</script>
+</body>
+</html>
