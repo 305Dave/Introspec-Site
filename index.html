@@ -1092,193 +1092,143 @@
      Uses wiwStep*, wiwNextBtn, wiwPrevBtn, wiwProgressBar, wiwStepLabel
      Completely separate from the mid-page demoStep* demo
      ══════════════════════════════════════════════════════════ -->
-<section id="watch-it-work" style="padding:100px 24px;background:linear-gradient(180deg,#07090f 0%,#090d16 100%);border-top:1px solid rgba(0,180,255,0.1);position:relative;z-index:1;">
+<!-- ═══ OWNER DEMO ═══ -->
+<section id="watch-it-work">
   <div class="container">
-    <div class="eyebrow" style="text-align:center;">The System in Action</div>
-    <h2 style="font-size:clamp(30px,4.5vw,52px);font-weight:900;line-height:1.1;letter-spacing:-0.03em;text-align:center;margin-bottom:12px;">Watch It <span class="grad">Work</span></h2>
-    <p style="text-align:center;color:var(--muted);font-size:17px;max-width:540px;margin:0 auto 48px;line-height:1.75;">From first inquiry to booked appointment — handled automatically, start to finish. Staff involved: 0.</p>
-
-    <!-- Phone-style demo shell -->
-    <div style="max-width:600px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 28px;position:relative;">
-
-      <!-- Step counter + progress bar -->
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-        <span id="wiwStepLabel" style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Step 1 of 6</span>
-        <div style="width:180px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;">
-          <div id="wiwProgressBar" style="height:100%;width:16.67%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px;transition:width 0.35s ease;"></div>
+    <div class="eyebrow">The System in Action</div>
+    <h2>The <span class="grad">Owner's View</span></h2>
+    <p style="color:var(--muted);max-width:560px;margin:0 auto 40px;text-align:center;font-size:1rem;line-height:1.6;">Dr. Lauren Chen owns Radiance Med Spa. Here's exactly what she sees — and doesn't have to do — when a new lead comes in.</p>
+    <div style="max-width:520px;margin:0 auto;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+        <span id="wiwStepLabel" style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.08em;white-space:nowrap;">STEP 1 OF 6</span>
+        <div style="flex:1;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;">
+          <div id="wiwProgressBar" style="height:100%;width:16.6%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px;transition:width 0.4s ease;"></div>
         </div>
       </div>
-
-      <!-- Steps -->
       <div id="wiwStepsWrapper">
-
-        <!-- STEP 1: New inquiry arrives -->
-        <div class="wiwStep" id="wiwStep1">
-          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">📩 New Inquiry — 11:47 PM</div>
-          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">👤</div>
+        <div id="wiwStep1" class="wiwStep">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:18px;letter-spacing:0.04em;">📋 Lead Inquiry — Radiance Med Spa · 8:42 PM</div>
+          <div class="sms-card" style="max-width:360px;border-radius:16px;padding:0;overflow:hidden;">
+            <div style="background:linear-gradient(135deg,rgba(0,180,255,0.12),rgba(123,97,255,0.12));padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:10px;">
+              <div style="width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:16px;">🌐</div>
               <div>
-                <div style="font-size:14px;color:#fff;font-weight:700;">Ashley M.</div>
-                <div style="font-size:11px;color:var(--muted);">Contact Form · 11:47 PM</div>
+                <div style="font-size:13px;font-weight:700;">Website Form Submission</div>
+                <div style="font-size:10px;color:var(--muted);">radiancemedspa.com · New Inquiry</div>
+              </div>
+              <div style="margin-left:auto;font-size:10px;color:var(--muted);">8:42 PM</div>
+            </div>
+            <div style="padding:16px 18px;display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--muted);font-weight:600;">Name</span><span style="font-size:13px;font-weight:600;">Priya S.</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--muted);font-weight:600;">Service Interested In</span><span style="font-size:13px;font-weight:600;color:var(--blue);">HydraFacial</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:var(--muted);font-weight:600;">Phone</span><span style="font-size:13px;font-weight:600;">(305) 555-0182</span></div>
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px;margin-top:4px;">
+                <div style="font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:600;">Message</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.8);line-height:1.5;">"Hi! I've been curious about HydraFacial and would love to know more about pricing and availability."</div>
               </div>
             </div>
-            <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:14px;font-size:14px;color:rgba(255,255,255,0.85);line-height:1.6;">
-              "Hi — I'm interested in Botox. Can you tell me about pricing and what areas you treat? I'd love to book something soon."
-            </div>
-          </div>
-          <div style="margin-top:14px;padding:10px 14px;background:rgba(0,180,255,0.07);border:1px solid rgba(0,180,255,0.15);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);">
-            ⏱ Inquiry logged. AI system activating...
+            <div style="padding:10px 18px 14px;text-align:center;"><div style="display:inline-flex;align-items:center;gap:6px;font-size:10px;color:var(--green);font-weight:700;letter-spacing:0.04em;"><span>●</span> LOGGED · AI SYSTEM ACTIVATING</div></div>
           </div>
         </div>
-
-        <!-- STEP 2: AI responds in 47 seconds -->
-        <div class="wiwStep" id="wiwStep2" style="display:none;">
-          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">⚡ AI Responds — 47 Seconds Later</div>
-          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🤖</div>
-              <div>
-                <div style="font-size:13px;color:rgba(255,255,255,0.85);">Introspec AI</div>
-                <div style="font-size:11px;color:var(--muted);">11:48 PM · <span style="color:#00e676;">47s response</span></div>
+        <div id="wiwStep2" class="wiwStep" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:18px;letter-spacing:0.04em;">⚡ Priya Texted Automatically — 60 Seconds Later</div>
+          <div class="sms-card">
+            <div class="sms-notch"></div>
+            <div class="sms-screen">
+              <div class="sms-hdr">
+                <div class="sms-avatar" style="background:linear-gradient(135deg,#00b4ff,#7b61ff);">RS</div>
+                <div><div class="sms-name">Radiance Med Spa</div><div class="sms-sub">Text Message · 8:43 PM</div></div>
+              </div>
+              <div class="sms-body">
+                <div class="bubble demo-in" style="background:rgba(255,255,255,0.08);border-radius:14px 14px 14px 4px;padding:10px 14px;max-width:85%;font-size:13px;line-height:1.5;color:#fff;">Hi Priya, thanks for reaching out to Radiance Med Spa! 👋 We got your inquiry about HydraFacial and will be in touch shortly.</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:4px;padding-left:4px;">Delivered · 8:43 PM</div>
               </div>
             </div>
-            <div style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;">
-              Hi Ashley — great timing! We offer Botox starting at <strong style="color:#fff;">$12/unit</strong> for forehead lines, crow's feet, and frown lines. Most clients need 20–40 units depending on the area.<br><br>
-              We have openings this week — you can grab a time here:<br>
-              <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="color:#7ecfff;">📅 Book Your Appointment →</a><br><br>
-              Let me know if you have any other questions!
-            </div>
           </div>
-          <div style="margin-top:14px;padding:10px 14px;background:rgba(0,230,118,0.07);border:1px solid rgba(0,230,118,0.15);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);">
-            🧠 Trained on: <span style="color:rgba(255,255,255,0.5);">services, pricing, FAQs, brand voice</span>
-          </div>
+          <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--muted);"><span style="color:var(--green);font-weight:700;">✓ Sent in 47 seconds.</span> No staff required.</div>
         </div>
-
-        <!-- STEP 3: Owner gets SMS alert -->
-        <div class="wiwStep" id="wiwStep3" style="display:none;">
-          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">📱 Owner SMS Alert — Instant</div>
+        <div id="wiwStep3" class="wiwStep" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:18px;letter-spacing:0.04em;">📱 Dr. Chen's Phone — Instant</div>
           <div style="max-width:320px;margin:0 auto;background:#1a1a2e;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:20px;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.07);">
-              <div style="font-size:20px;">💬</div>
-              <div style="font-size:13px;font-weight:700;color:#fff;">Messages</div>
+              <div style="font-size:20px;">📲</div>
+              <div style="font-size:13px;font-weight:700;color:#fff;">Introspec Agentic</div>
               <div style="margin-left:auto;font-size:11px;color:var(--muted);">now</div>
             </div>
             <div style="display:flex;gap:10px;align-items:flex-start;">
-              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">IA</div>
+              <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">IA</div>
               <div style="flex:1;">
-                <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Introspec Agentic</div>
-                <div style="background:rgba(255,255,255,0.06);border-radius:12px;padding:12px;font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;">
-                  🔔 New lead: <strong>Ashley M.</strong> — Botox inquiry. AI responded in 47s. Check dashboard.
-                </div>
+                <div style="font-size:11px;font-weight:700;color:var(--blue);margin-bottom:6px;">NEW LEAD ALERT</div>
+                <div style="font-size:13px;color:#fff;line-height:1.5;"><strong>Priya S.</strong> is interested in <strong>HydraFacial</strong>.<br>She's already been texted. ✅<div style="margin-top:8px;padding:8px 10px;background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.2);border-radius:8px;font-size:11px;color:var(--green);font-weight:600;">No action needed — system is handling it.</div></div>
               </div>
             </div>
           </div>
-          <div style="margin-top:14px;padding:10px 14px;background:rgba(123,97,255,0.07);border:1px solid rgba(123,97,255,0.18);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);text-align:center;">
-            👤 You were asleep. The system handled it.
+          <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--muted);">Dr. Chen was just informed. <span style="color:#fff;font-weight:600;">She didn't have to do anything.</span></div>
+        </div>
+        <div id="wiwStep4" class="wiwStep" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:18px;letter-spacing:0.04em;">🔁 Priya Hasn't Replied — 24-Hour Follow-Up Fires</div>
+          <div class="sms-card">
+            <div class="sms-notch"></div>
+            <div class="sms-screen">
+              <div class="sms-hdr">
+                <div class="sms-avatar" style="background:linear-gradient(135deg,#00b4ff,#7b61ff);">RS</div>
+                <div><div class="sms-name">Radiance Med Spa</div><div class="sms-sub">Text Message · Next Day 8:42 PM</div></div>
+              </div>
+              <div class="sms-body">
+                <div style="font-size:10px;color:var(--muted);text-align:center;padding:4px 0 6px;">— 24 hours later —</div>
+                <div class="bubble demo-in" style="background:rgba(255,255,255,0.08);border-radius:14px 14px 14px 4px;padding:10px 14px;max-width:90%;font-size:13px;line-height:1.5;color:#fff;">Hey Priya! Just following up on your inquiry at Radiance Med Spa. 😊 Ready to get scheduled? Grab a time here:<br><a href="https://calendly.com/david-introspecagentic/30min" style="color:var(--blue);word-break:break-all;font-size:12px;">calendly.com/david-introspecagentic/30min</a></div>
+                <div style="font-size:10px;color:var(--muted);margin-top:4px;padding-left:4px;">Delivered · Automated Follow-Up</div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--muted);">Fired automatically. <span style="color:#fff;font-weight:600;">Dr. Chen never logged in.</span></div>
+        </div>
+        <div id="wiwStep5" class="wiwStep" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:18px;letter-spacing:0.04em;">🎉 Priya Books a Consultation</div>
+          <div style="max-width:320px;margin:0 auto;background:#1a1a2e;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.07);">
+              <div style="font-size:20px;">📲</div>
+              <div style="font-size:13px;font-weight:700;color:#fff;">Introspec Agentic</div>
+              <div style="margin-left:auto;font-size:11px;color:var(--muted);">now</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--green),#00b4ff);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
+              <div style="flex:1;">
+                <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:6px;">BOOKING CONFIRMED</div>
+                <div style="font-size:13px;color:#fff;line-height:1.5;"><strong>Priya S.</strong> just booked a consultation. You're all set. 🎉<div style="margin-top:8px;padding:8px 10px;background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:8px;font-size:12px;color:rgba(255,255,255,0.7);">📅 HydraFacial Consultation<br><span style="color:var(--green);">Confirmed · Via Calendly</span></div></div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <!-- STEP 4: Ashley follows up next morning -->
-        <div class="wiwStep" id="wiwStep4" style="display:none;">
-          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">💬 Ashley Follows Up — 9:14 AM</div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;">
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-                <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:12px;">👤</div>
-                <span style="font-size:11px;color:var(--muted);">Ashley M. · 9:14 AM</span>
-              </div>
-              <div style="font-size:13px;color:rgba(255,255,255,0.85);">"One more question — do I need to come in for a consultation first or can I just book?"</div>
+        <div id="wiwStep6" class="wiwStep" style="display:none;">
+          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:18px;letter-spacing:0.04em;">📊 Final Result</div>
+          <div style="max-width:380px;margin:0 auto;text-align:center;">
+            <div style="font-size:22px;font-weight:800;margin-bottom:6px;">Dr. Chen spent <span style="color:var(--blue);">0 minutes</span><br>on this lead.</div>
+            <div style="font-size:14px;color:var(--muted);margin-bottom:28px;">The system captured, followed up, and booked — automatically.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+              <div style="background:rgba(0,180,255,0.06);border:1px solid rgba(0,180,255,0.15);border-radius:12px;padding:14px 10px;"><div style="font-size:26px;font-weight:800;color:var(--blue);">47s</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">First response</div></div>
+              <div style="background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:12px;padding:14px 10px;"><div style="font-size:26px;font-weight:800;color:var(--green);">1</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Booking confirmed</div></div>
+              <div style="background:rgba(123,97,255,0.06);border:1px solid rgba(123,97,255,0.15);border-radius:12px;padding:14px 10px;"><div style="font-size:26px;font-weight:800;color:var(--purple);">2</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Auto follow-ups sent</div></div>
+              <div style="background:rgba(255,97,171,0.06);border:1px solid rgba(255,97,171,0.15);border-radius:12px;padding:14px 10px;"><div style="font-size:26px;font-weight:800;color:var(--pink);">0 min</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Owner time spent</div></div>
             </div>
-            <div style="background:rgba(0,180,255,0.05);border:1px solid rgba(0,180,255,0.12);border-radius:14px;padding:16px;">
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-                <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:12px;">🤖</div>
-                <span style="font-size:11px;color:var(--muted);">Introspec AI · 9:14 AM · <span style="color:#00e676;">instant reply</span></span>
-              </div>
-              <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.65;">
-                Hi Ashley — no consultation required! You can book directly. Your first appointment includes a quick pre-treatment review with the provider. Click here whenever you're ready: <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="color:#7ecfff;">Book Now →</a>
-              </div>
-            </div>
-          </div>
-          <div style="margin-top:12px;padding:10px 14px;background:rgba(0,180,255,0.07);border:1px solid rgba(0,180,255,0.12);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);text-align:center;">
-            🤖 Staff involved so far: 0
           </div>
         </div>
-
-        <!-- STEP 5: 24-hour automated follow-up -->
-        <div class="wiwStep" id="wiwStep5" style="display:none;">
-          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">🔁 Ashley Hasn't Booked — 24-Hour Follow-Up Goes Out</div>
-          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-              <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🤖</div>
-              <div>
-                <div style="font-size:13px;color:rgba(255,255,255,0.85);">Introspec AI</div>
-                <div style="font-size:11px;color:var(--muted);">Automated · 24h follow-up</div>
-              </div>
-            </div>
-            <div style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;">
-              Hi Ashley — just wanted to follow up in case life got busy! Your Botox appointment is one click away, and our schedule tends to fill up quickly.<br><br>
-              <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" style="color:#7ecfff;">📅 Grab your spot →</a><br><br>
-              We'd love to see you in. 😊
-            </div>
-          </div>
-          <div style="margin-top:14px;padding:10px 14px;background:rgba(123,97,255,0.07);border:1px solid rgba(123,97,255,0.18);border-radius:10px;font-size:12px;color:rgba(255,255,255,0.6);">
-            🔁 Sent automatically. No one on your team did anything.
-          </div>
-        </div>
-
-        <!-- STEP 6: Ashley books -->
-        <div class="wiwStep" id="wiwStep6" style="display:none;">
-          <div style="font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.04em;">🎉 Ashley Books ✓</div>
-          <div style="background:linear-gradient(135deg,rgba(0,230,118,0.08),rgba(0,180,255,0.06));border:1px solid rgba(0,230,118,0.2);border-radius:14px;padding:24px;text-align:center;">
-            <div style="font-size:48px;margin-bottom:14px;">✅</div>
-            <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:6px;">Ashley M. booked a Botox appointment</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:20px;">June 5 · 2:00 PM · Confirmed automatically</div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
-              <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:12px;">
-                <div style="font-size:20px;font-weight:900;color:#00e676;">47s</div>
-                <div style="font-size:10px;color:var(--muted);margin-top:3px;">First response</div>
-              </div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:12px;">
-                <div style="font-size:20px;font-weight:900;color:var(--blue);">3</div>
-                <div style="font-size:10px;color:var(--muted);margin-top:3px;">AI messages sent</div>
-              </div>
-              <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:12px;">
-                <div style="font-size:20px;font-weight:900;color:var(--purple);">0</div>
-                <div style="font-size:10px;color:var(--muted);margin-top:3px;">Staff involved</div>
-              </div>
-            </div>
-          </div>
-          <div style="margin-top:16px;padding:14px 18px;background:rgba(0,230,118,0.07);border:1px solid rgba(0,230,118,0.18);border-radius:10px;font-size:13px;color:rgba(255,255,255,0.75);text-align:center;">
-            ✅ Ashley M. just booked! June 5 @ 2pm — <strong style="color:#00e676;">Staff involved: 0</strong>
-          </div>
-        </div>
-
-      </div><!-- /wiwStepsWrapper -->
-
-      <!-- Navigation buttons -->
+      </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:24px;">
-        <button id="wiwPrevBtn" disabled style="padding:12px 24px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:14px;font-weight:600;cursor:not-allowed;opacity:0.35;transition:background 0.2s,opacity 0.2s;">← Previous</button>
-        <button id="wiwNextBtn" style="padding:12px 28px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,180,255,0.35);transition:transform 0.15s,box-shadow 0.15s;">Next →</button>
+        <button id="wiwPrevBtn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;outline:none;" disabled>← Previous</button>
+        <button id="wiwNextBtn" style="background:linear-gradient(135deg,var(--blue),var(--purple));border:none;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 18px rgba(0,180,255,0.3);outline:none;">Next →</button>
       </div>
-
-      <!-- Progress dots -->
-      <div style="display:flex;justify-content:center;gap:7px;margin-top:18px;">
-        <div class="wiw-dot active" data-dot="1" style="width:7px;height:7px;border-radius:50%;background:var(--blue);transition:background 0.3s,transform 0.3s;transform:scale(1.4);"></div>
-        <div class="wiw-dot" data-dot="2" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
-        <div class="wiw-dot" data-dot="3" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
-        <div class="wiw-dot" data-dot="4" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
-        <div class="wiw-dot" data-dot="5" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
-        <div class="wiw-dot" data-dot="6" style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background 0.3s,transform 0.3s;"></div>
+      <div style="display:flex;justify-content:center;gap:6px;margin-top:18px;">
+        <div class="wiw-dot active" style="width:8px;height:8px;border-radius:50%;background:var(--blue);transition:all 0.3s;"></div>
+        <div class="wiw-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s;"></div>
+        <div class="wiw-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s;"></div>
+        <div class="wiw-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s;"></div>
+        <div class="wiw-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s;"></div>
+        <div class="wiw-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s;"></div>
       </div>
-
-    </div><!-- /demo shell -->
-
-    <!-- CTA under demo -->
-    <div style="text-align:center;margin-top:40px;">
-      <a href="https://calendly.com/david-introspecagentic/30min" target="_blank" class="btn-primary">📅 &nbsp;Get This Working for Your Business →</a>
     </div>
-
+    <div style="text-align:center;margin-top:44px;">
+      <a href="https://calendly.com/david-introspecagentic/30min" class="btn-primary" target="_blank" rel="noopener">📅 &nbsp;Get This Working for Your Business →</a>
+    </div>
   </div>
 </section>
 <style>
