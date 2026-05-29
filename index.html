@@ -395,7 +395,9 @@
   }
   .faq-item.open .faq-a { max-height: 400px; padding-bottom: 22px; }
   .faq-item.open .faq-icon { transform: rotate(45deg); }
-</style>
+
+  /* Fix: card visibility - scroll animation left cards at opacity:0 */
+  .included-grid .card { opacity: 1 !important; transform: none !important; }</style>
 </head>
 <body>
 
@@ -576,7 +578,7 @@
 
     <div style="text-align:center;margin-bottom:52px;">
       <div class="eyebrow">See It In Action</div>
-     <section class="section" id="see-it-in-action">
+     <section class="section" id="see-it-in-action" style="padding-top:0">
       <div class="container">
         <div class="eyebrow">SEE IT IN ACTION</div>
         <h2>The AI Responds While You’re With Patients</h2>
