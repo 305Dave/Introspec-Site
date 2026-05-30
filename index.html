@@ -397,7 +397,67 @@
   .faq-item.open .faq-icon { transform: rotate(45deg); }
 
   /* Fix: card visibility - scroll animation left cards at opacity:0 */
-  .included-grid .card { opacity: 1 !important; transform: none !important; }</style>
+  .included-grid .card { opacity: 1 !important; transform: none !important; }
+  /* ── Guarantee Nav Link ── */
+  .nav-guarantee-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    padding: 8px 16px;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .nav-guarantee-link:hover { opacity: 1; }
+
+  /* ── Guarantee Section ── */
+  #guarantee {
+    background: #0b0f1a;
+    border-top: 1px solid rgba(0,180,255,0.12);
+    border-bottom: 1px solid rgba(0,180,255,0.12);
+    padding: 88px 24px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .guarantee-inner {
+    max-width: 660px;
+    margin: 0 auto;
+  }
+  .guarantee-icon {
+    font-size: 44px;
+    color: var(--blue);
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+  .guarantee-headline {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .guarantee-sub {
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 24px;
+  }
+  .guarantee-body {
+    font-size: 16px;
+    color: rgba(255,255,255,0.48);
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+</style>
 </head>
 <body>
 
@@ -411,7 +471,7 @@
     <div class="logo"><span class="grad">IntrospecAgentic.AI</span></div>
     <a href="#founder" class="nav-founder-btn">My Purpose</a>
   </div>
-    <a href="#see-it-in-action" class="nav-cta">📅 &nbsp;Book a Free Demo</a>
+    <a href="#guarantee" class="nav-guarantee-link">Guarantee</a><a href="#see-it-in-action" class="nav-cta">📅 &nbsp;Book a Free Demo</a>
   </div>
 <a href="#see-it-in-action" class="nav-demo-btn">See It In Action</a>
 </nav>
@@ -1061,6 +1121,20 @@
 
 
 <!-- FOOTER -->
+
+<!-- GUARANTEE -->
+<section id="guarantee">
+  <div class="guarantee-inner">
+    <div class="guarantee-icon">&#10022;</div>
+    <h2 class="guarantee-headline">Live in 7 days. Responding in 60 seconds.</h2>
+    <p class="guarantee-sub">Or your first month is free.</p>
+    <p class="guarantee-body">
+      If your system isn't live within 7 days of onboarding, or isn't responding
+      to leads within 60 seconds &#8212; you don't pay for month one. No fine print.
+    </p>
+  </div>
+</section>
+
 <footer style="padding:48px 24px;background:#07090f;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
   <div class="container">
     <div style="font-size:20px;font-weight:800;letter-spacing:-0.03em;margin-bottom:10px;"><span class="grad">Introspec</span> Agentic</div>
