@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garcia Law Group | Miami Personal Injury Attorneys</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; color: #1a1a2e; background: #fff; }
+  .glg-nav { background: #0d1b2a; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #c9a84c; }
+  .glg-logo-name { color: #fff; font-size: 24px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; }
+  .glg-logo-sub { color: #c9a84c; display: block; font-size: 12px; font-weight: normal; letter-spacing: 3px; text-transform: uppercase; margin-top: 3px; font-family: Arial, sans-serif; }
+  .glg-phone-link { color: #c9a84c; font-size: 20px; font-weight: bold; text-decoration: none; font-family: Arial, sans-serif; }
+  .glg-phone-link:hover { color: #fff; }
+  .glg-hero { background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 60%, #0d2a4a 100%); color: #fff; padding: 80px 40px 70px; text-align: center; position: relative; overflow: hidden; }
+  .glg-hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+  .glg-badge { display: inline-block; background: rgba(201, 168, 76, 0.2); border: 1px solid #c9a84c; color: #c9a84c; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 20px; margin-bottom: 24px; font-family: Arial, sans-serif; }
+  .glg-hero h1 { font-size: 42px; line-height: 1.25; margin-bottom: 24px; font-weight: bold; }
+  .glg-hero h1 em { color: #c9a84c; font-style: normal; }
+  .glg-hero-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .glg-hero-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 20px; border-radius: 4px; font-size: 14px; font-family: Arial, sans-serif; display: flex; align-items: center; gap: 8px; }
+  .glg-hero-badge .icon { color: #c9a84c; font-size: 16px; }
+  .glg-hero-loc { color: #adc8e6; font-size: 15px; font-family: Arial, sans-serif; margin-top: 8px; }
+  .glg-trust { background: #c9a84c; padding: 14px 40px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; align-items: center; }
+  .glg-trust-item { color: #0d1b2a; font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif; display: flex; align-items: center; gap: 6px; }
+  .glg-trust-item .bullet { font-size: 18px; }
+  .glg-form-section { background: #f7f9fc; padding: 60px 40px; display: flex; justify-content: center; }
+  .glg-form-box { background: #fff; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.12); padding: 48px; max-width: 720px; width: 100%; border-top: 4px solid #c9a84c; }
+  .glg-form-heading { color: #0d1b2a; font-size: 28px; margin-bottom: 10px; text-align: center; }
+  .glg-form-sub { color: #666; font-size: 15px; text-align: center; margin-bottom: 32px; font-family: Arial, sans-serif; line-height: 1.5; }
+  .glg-form-sub strong { color: #c9a84c; }
+  .glg-tally-wrapper { width: 100%; min-height: 400px; }
+  .glg-practice { background: #0d1b2a; padding: 60px 40px; color: #fff; text-align: center; }
+  .glg-practice-label { color: #c9a84c; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-family: Arial, sans-serif; margin-bottom: 12px; }
+  .glg-practice h2 { font-size: 30px; margin-bottom: 40px; font-weight: bold; }
+  .glg-practice-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; max-width: 900px; margin: 0 auto; }
+  .glg-practice-item { background: #1a3a5c; border-left: 4px solid #c9a84c; padding: 18px 28px; border-radius: 4px; font-size: 15px; font-family: Arial, sans-serif; min-width: 220px; text-align: left; }
+  .glg-practice-item::before { content: '▶'; color: #c9a84c; margin-right: 10px; font-size: 12px; }
+  .glg-why { background: #fff; padding: 60px 40px; text-align: center; }
+  .glg-why-label { color: #c9a84c; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-family: Arial, sans-serif; margin-bottom: 12px; }
+  .glg-why h2 { font-size: 30px; color: #0d1b2a; margin-bottom: 40px; }
+  .glg-why-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; max-width: 900px; margin: 0 auto; }
+  .glg-why-card { flex: 1 1 250px; max-width: 280px; padding: 28px 24px; border: 1px solid #e8ecf2; border-radius: 8px; text-align: center; }
+  .glg-why-icon { font-size: 36px; margin-bottom: 14px; }
+  .glg-why-card h3 { color: #0d1b2a; font-size: 17px; margin-bottom: 8px; }
+  .glg-why-card p { color: #666; font-size: 14px; font-family: Arial, sans-serif; line-height: 1.6; }
+  .glg-footer { background: #050d15; color: #666; text-align: center; padding: 28px; font-size: 14px; font-family: Arial, sans-serif; line-height: 1.8; }
+  .glg-footer strong { color: #c9a84c; display: block; font-size: 16px; margin-bottom: 4px; }
+  .glg-footer-sub { color: #444; font-size: 12px; margin-top: 8px; }
+  @media (max-width: 600px) { .glg-nav { flex-direction: column; gap: 14px; text-align: center; padding: 20px; } .glg-hero { padding: 50px 20px; } .glg-hero h1 { font-size: 28px; } .glg-form-box { padding: 28px 20px; } }
+</style>
+</head>
+<body>
+<nav class="glg-nav">
+  <div><div class="glg-logo-name">Garcia Law Group</div><span class="glg-logo-sub">Personal Injury Attorneys</span></div>
+  <a class="glg-phone-link" href="tel:+13058427100">(305) 842-7100</a>
+</nav>
+<section class="glg-hero">
+  <div class="glg-hero-content">
+    <div class="glg-badge">&#9679; Free Consultations Available Now</div>
+    <h1>Injured in an Accident?<br><em>We Fight to Get You What You Deserve.</em></h1>
+    <div class="glg-hero-badges">
+      <div class="glg-hero-badge"><span class="icon">&#10003;</span> Free Case Evaluation</div>
+      <div class="glg-hero-badge"><span class="icon">&#10003;</span> No Fee Unless We Win</div>
+      <div class="glg-hero-badge"><span class="icon">&#10003;</span> Available 24/7</div>
+    </div>
+    <p class="glg-hero-loc">&#128205; Miami, FL &mdash; Serving All of South Florida</p>
+  </div>
+</section>
+<div class="glg-trust">
+  <div class="glg-trust-item"><span class="bullet">&#9733;</span> Millions Recovered for Clients</div>
+  <div class="glg-trust-item"><span class="bullet">&#9733;</span> 15+ Years of Experience</div>
+  <div class="glg-trust-item"><span class="bullet">&#9733;</span> Board-Certified Trial Attorneys</div>
+  <div class="glg-trust-item"><span class="bullet">&#9733;</span> Se Habla Espa&ntilde;ol</div>
+</div>
+<section class="glg-form-section">
+  <div class="glg-form-box">
+    <h2 class="glg-form-heading">Request Your Free Case Evaluation</h2>
+    <p class="glg-form-sub">Fill out the form below and our team will contact you <strong>within minutes.</strong><br>All information is confidential and there is no obligation to hire us.</p>
+    <div class="glg-tally-wrapper">
+      <iframe data-tally-src="https://tally.so/embed/2ED54b?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" title="Request a Free Case Evaluation"></iframe>
+    </div>
+  </div>
+</section>
+<section class="glg-practice">
+  <p class="glg-practice-label">What We Handle</p>
+  <h2>Our Practice Areas</h2>
+  <div class="glg-practice-grid">
+    <div class="glg-practice-item">Car &amp; Auto Accidents</div>
+    <div class="glg-practice-item">Slip &amp; Fall Injuries</div>
+    <div class="glg-practice-item">Truck Accidents</div>
+    <div class="glg-practice-item">Workplace Injuries</div>
+    <div class="glg-practice-item">Motorcycle Accidents</div>
+  </div>
+</section>
+<section class="glg-why">
+  <p class="glg-why-label">Why Choose Us</p>
+  <h2>The Garcia Law Group Difference</h2>
+  <div class="glg-why-grid">
+    <div class="glg-why-card"><div class="glg-why-icon">&#9878;</div><h3>No Win, No Fee</h3><p>You pay nothing unless we win your case. Our fee comes from your settlement — never out of pocket.</p></div>
+    <div class="glg-why-card"><div class="glg-why-icon">&#9200;</div><h3>Fast Response</h3><p>We respond to new inquiries within minutes, day or night. Your case starts the moment you contact us.</p></div>
+    <div class="glg-why-card"><div class="glg-why-icon">&#128081;</div><h3>Proven Results</h3><p>Our attorneys have recovered millions for injured clients across South Florida since 2008.</p></div>
+  </div>
+</section>
+<footer class="glg-footer">
+  <strong>Garcia Law Group</strong>
+  Miami, FL &mdash; Serving All of South Florida<br>
+  <a href="tel:+13058427100" style="color: #c9a84c; text-decoration: none;">(305) 842-7100</a>
+  <div class="glg-footer-sub">No fee unless we win your case. &copy; 2026 Garcia Law Group. This is a demonstration page.</div>
+</footer>
+<script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+</body>
+</html>
